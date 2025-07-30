@@ -1,55 +1,204 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+<header class="site-header" role="banner">
+  <div class="container header__container">
+    <h1 class="site-title">
+      <a href="{{ routes.root_url }}" class="site-title__link">{{ shop.name }}</a>
+    </h1>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+    <nav class="site-nav" role="navigation" aria-label="Main menu">
+      <ul class="nav__list">
+        {% for link in section.settings.menu.links %}
+          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+            {% if link.links != blank %}
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="submenu-{{ forloop.index }}"
+              >
+                {{ link.title }}
+                {% render 'dropdown-icon' %}
+              </button>
+              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu">
+                {% for child_link in link.links %}
+                  <li role="none">
+                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+    <div class="header__utilities">
+      {% if shop.customer_accounts_enabled %}
+        <div class="account-links">
+          {% if customer %}
+            <a href="{{ routes.account_url }}" class="account-link" aria-label="My account">
+              {{ 'icon-account.svg' | inline_asset_content }}
+            </a>
+            {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="account-link logout-link"' }}
+          {% else %}
+            {{ 'Login' | customer_login_link | replace: '<a', '<a class="account-link login-link"' }}
+            {{ 'Register' | customer_register_link | replace: '<a', '<a class="account-link register-link"' }}
+          {% endif %}
+        </div>
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Shopping cart">
+        {% if cart.item_count > 0 %}
+          <span class="cart-count" aria-live="polite">{{ cart.item_count }}</span>
+        {% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
   </div>
 </header>
 
+
 {% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  header a sup {
+  .site-header {
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  position: sticky;
+  top: 0;
+}
+
+.header__container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title__link {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.site-nav .nav__list {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav__item {
+  position: relative;
+}
+
+.nav__link,
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font: inherit;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dropdown-toggle:focus {
+  outline: 2px solid #007aff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0.5rem 0;
+  display: none;
+  z-index: 10;
+  list-style: none;
+}
+
+.has-dropdown:hover .dropdown-menu,
+.dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
+  display: block;
+}
+
+.dropdown__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown__link:hover {
+  background-color: #f5f5f5;
+}
+
+.header__utilities {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+}
+
+svg.size-6 {
+    width: 18px;
     position: absolute;
     left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
+    top: 2px;
+}
+
+  .account-links {
     display: flex;
     gap: 1rem;
   }
+
+  .account-link {
+    color: #333;
+    text-decoration: none;
+    font: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .account-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+
+  .cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-link svg,
+  .account-link svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    color: black;
+  }
+
 {% endstylesheet %}
 
 {% schema %}
@@ -59,6 +208,7 @@
     {
       "type": "link_list",
       "id": "menu",
+      "default": "main-menu",
       "label": "t:labels.menu"
     }
   ]
