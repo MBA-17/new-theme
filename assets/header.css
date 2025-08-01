@@ -1,3 +1,21 @@
+button#mobile-menu-toggle {
+    border: none;
+    background: transparent;
+    text-align: center;
+}
+
+.icon-menu {
+  width: 24px;
+  height: 24px;
+  stroke: #000; /* or currentColor */
+}
+
+.close-btn {
+  width: 24px;
+  height: 24px;
+  stroke: #000; /* or currentColor */
+}
+
 .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
   display: block;
   animation: fadeIn 0.3s ease;
@@ -18,7 +36,7 @@
 
 /* Original CSS with minor enhancements */
 .site-header {
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   background: #fff;
   border-bottom: 1px solid #eee;
   display: flex;
@@ -134,7 +152,7 @@
   align-items: center;
   justify-content: center;
   padding: 6px;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .account-link:hover {
@@ -148,7 +166,7 @@
   display: flex;
   align-items: center;
   padding: 6px;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .cart-link:hover {
@@ -164,34 +182,146 @@
 } 
 
 /* Mobile-Menu */
-.mobile-menu-icon{
-    display: none;
+.mobile-menu-icon {
+  display: none;
 }
 
-.mobile-menu-container{
-    display: none;
+.mobile-menu-container {
+  display: none;
 }
 
 @media (max-width: 768px) {
-   .site-nav{
-        display: none;
-}
+  .site-nav {
+    display: none;
+  }
 
-   .mobile-menu-icon{
+  .mobile-menu-icon {
     display: block;
-}
+  }
 
   .mobile-menu-container {
-    width: 300px;
-    height: auto;
-    padding: 10px;
-    z-index: 3;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .mobile-menu-container.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .mobile-menu-overlay {
     position: absolute;
     top: 0;
-    left: -3%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-menu-container.active .mobile-menu-overlay {
+    opacity: 1;
+  }
+  
+  .mobile-menu-drawer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    padding: 40px 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  
+  .mobile-menu-container.active .mobile-menu-drawer {
+    transform: translateX(0);
+  }
+  
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+  }
+  
+  .mobile-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 15px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid gainsboro;
+  }
+  
+  .mobile-dropdown-toggle:focus {
+    outline: 2px solid #007aff;
+  }
+  
+  .mobile-dropdown-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .mobile-dropdown-toggle[aria-expanded="true"] .mobile-dropdown-icon {
+    transform: rotate(180deg);
+  }
+  
+  .mobile-dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 15px;
+    list-style: none;
+  }
+  
+  .mobile-dropdown-toggle[aria-expanded="true"] + .mobile-dropdown-menu {
+    max-height: 500px;
+  }
+  
+  .mobile__nav__link,
+  .mobile__dropdown__link {
     display: block;
-    background-color: white;
-}
+    padding: 15px 0;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid gainsboro;
+  }
+  
+  .mobile__nav__link:focus,
+  .mobile__dropdown__link:focus {
+    outline: 2px solid #007aff;
+  }
+  
+  .header__utilities {
+    display: none;
+  }
 
+  ul.mobile_nav__list {
+    list-style: none;
+    padding: 0 0 0 0px;
+    margin-top: 30px;
+  }
 }

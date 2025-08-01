@@ -12,7 +12,7 @@
 
     <!-- Mobile-Menu-icon -->
     <div class="mobile-menu-icon">
-      <button class="menu-icon" type="button">
+      <button class="menu-icon" type="button" id="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false">
         {% render 'Menu-icon' %}
       </button>
     </div>
@@ -76,53 +76,52 @@
       </a>
     </div>
 
-    <!-- Mobile-Menu -->
-  <div class="mobile-menu-container">
+   <!-- Mobile-Menu -->
+    <div class="mobile-menu-container" id="mobile-menu-container">
+      <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+        <div class="mobile-menu-drawer">
+           <!-- Mobile-Close-Button -->
+          <div class="close">
+          <button class="close-btn" type="button" id="mobile-menu-close" aria-label="Close mobile menu">
+            {% render 'close-button' %}
+          </button>
+        </div>
 
-    <!-- Mobile-Close-Button -->
-    <div class="close">
-      <button class="close-btn" type="button">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </button>
+        <!-- Mobile-Navigation -->
+        <nav class="mobile-nav" role="navigation" aria-label="Mobile menu">
+          <ul class="mobile_nav__list">
+            {% for link in section.settings.menu.links %}
+              <li class="mobile_nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+                {% if link.links != blank %}
+                  <button
+                    class="mobile-dropdown-toggle"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="mobile-submenu-{{ forloop.index }}"
+                  >
+                    {{ link.title }}
+                    <svg class="mobile-dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <ul class="mobile-dropdown-menu" id="mobile-submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                    {% for child_link in link.links %}
+                      <li role="none">
+                        <a href="{{ child_link.url }}" role="menuitem" class="mobile__dropdown__link">
+                          {{ child_link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <a href="{{ link.url }}" class="mobile__nav__link">{{ link.title }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
     </div>
-
-    <!-- Mobile-Navigation -->
-    <nav class="mobile-nav" role="navigation" aria-label="Main menu">
-      <ul class="mobile_nav__list">
-        {% for link in section.settings.menu.links %}
-          <li class="mobile_nav__item {% if link.links != blank %}has-dropdown{% endif %}">
-            {% if link.links != blank %}
-              <button
-                class="dropdown-toggle"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="submenu-{{ forloop.index }}"
-                data-dropdown-toggle
-              >
-                {{ link.title }}
-                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-              <ul class="mobile-dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
-                {% for child_link in link.links %}
-                  <li role="none">
-                    <a href="{{ child_link.url }}" role="menuitem" class="mobile__dropdown__link">
-                      {{ child_link.title }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <a href="{{ link.url }}" class="mobile__nav__link">{{ link.title }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </div> 
 
   </div>
 </header>

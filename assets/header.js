@@ -100,3 +100,81 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+// Mobile-Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu elements
+  const mobileMenuContainer = document.getElementById('mobile-menu-container');
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  
+  // Track last focused element for accessibility
+  let lastFocusedElement;
+  
+  // Function to open mobile menu
+  function openMobileMenu() {
+    mobileMenuContainer.classList.add('active');
+    mobileMenuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    
+    // Store last focused element
+    lastFocusedElement = document.activeElement;
+    
+    // Focus the close button
+    setTimeout(() => {
+      mobileMenuClose.focus();
+    }, 100);
+  }
+  
+  // Function to close mobile menu
+  function closeMobileMenu() {
+    mobileMenuContainer.classList.remove('active');
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = ''; // Re-enable scrolling
+    
+    // Return focus to the last focused element
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+  }
+  
+  // Event listeners for mobile menu
+  mobileMenuToggle.addEventListener('click', openMobileMenu);
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+  
+  // Close menu when pressing ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenuContainer.classList.contains('active')) {
+      closeMobileMenu();
+    }
+  });
+  
+  // Mobile dropdown functionality
+  const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+  
+  mobileDropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+      
+      // Close other dropdowns when opening a new one
+      if (!isExpanded) {
+        mobileDropdownToggles.forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    });
+  });
+  
+  // Close dropdowns when clicking a link
+  document.querySelectorAll('.mobile__dropdown__link').forEach(link => {
+    link.addEventListener('click', function() {
+      closeMobileMenu();
+    });
+  });
+});
