@@ -11,8 +11,8 @@ button#mobile-menu-toggle {
 }
 
 .close-btn {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   stroke: #000; /* or currentColor */
 }
 
@@ -35,20 +35,22 @@ button#mobile-menu-toggle {
 }
 
 /* Original CSS with minor enhancements */
+h1.site-title {
+    display: flex;
+    align-items: center;
+}
+
 .site-header {
-  padding: 1rem 1.5rem;
   background: #fff;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: center;
   z-index: 100;
-  position: sticky;
-  top: 0;
+  height: 5rem;
 }
 
 .header__container {
   width: 100%;
-  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -199,6 +201,10 @@ button#mobile-menu-toggle {
     display: block;
   }
 
+  h1.site-title{
+    order: 2;
+  }
+
   .mobile-menu-container {
     position: fixed;
     top: 0;
@@ -316,7 +322,22 @@ button#mobile-menu-toggle {
   }
   
   .header__utilities {
+    order: 2;
+  }
+
+  .account-links{
     display: none;
+  }
+
+  .mobile-account-links {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    top: 60%;
+    gap: 0.5rem;
+    font-size: larger;
+    font-weight: 600;
   }
 
   ul.mobile_nav__list {
@@ -324,4 +345,5 @@ button#mobile-menu-toggle {
     padding: 0 0 0 0px;
     margin-top: 30px;
   }
+
 }
