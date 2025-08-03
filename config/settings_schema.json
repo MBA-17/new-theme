@@ -15,6 +15,30 @@
         "content": "t:general.fonts"
       },
       {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_logo_image",
+        "label": "Mobile Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "dark_logo_image",
+        "label": "Dark Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "label": "Max logo width (PX)",
+        "min": 100,
+        "max": 400,
+        "step": 10,
+        "default": 200
+      },
+      {
         "type": "font_picker",
         "id": "type_primary_font",
         "default": "work_sans_n4",

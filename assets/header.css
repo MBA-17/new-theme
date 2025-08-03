@@ -2,18 +2,18 @@ button#mobile-menu-toggle {
     border: none;
     background: transparent;
     text-align: center;
+    color: var(--header-foreground);
 }
 
 .icon-menu {
   width: 24px;
   height: 24px;
-  stroke: #000; /* or currentColor */
+  stroke: var(--header-foreground); /* or currentColor */
 }
 
 .close-btn {
   width: 30px;
   height: 30px;
-  stroke: #000; /* or currentColor */
 }
 
 .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
@@ -41,7 +41,8 @@ h1.site-title {
 }
 
 .site-header {
-  background: #fff;
+  background: var(--header-bg);
+  color: var(--header-foreground);
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: center;
@@ -78,7 +79,7 @@ h1.site-title {
   background: none;
   border: none;
   font: inherit;
-  color: #333;
+  color: var(--header-foreground);
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -91,7 +92,7 @@ h1.site-title {
 
 .nav__link:hover,
 .dropdown-toggle:hover {
-  background-color: #f5f5f5;
+  background-color: var(--header-bg);
 }
 
 .dropdown-menu {
@@ -99,7 +100,7 @@ h1.site-title {
   top: 100%;
   left: 0;
   min-width: 180px;
-  background-color: #fff;
+  background-color: var(--header-bg);
   border: 1px solid #ccc;
   padding: 0.5rem 0;
   display: none;
@@ -112,12 +113,12 @@ h1.site-title {
 .dropdown__link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #333;
+  color: var(--color-foreground);
   text-decoration: none;
 }
 
 .dropdown__link:hover {
-  background-color: #f5f5f5;
+  background-color: var(--header-bg);
 }
 
 .header__utilities {
@@ -130,8 +131,8 @@ h1.site-title {
   position: absolute;
   top: -8px;
   right: -10px;
-  background-color: black;
-  color: white;
+  background-color: var(--header-bg);
+  color: var(--header-foreground);
   border-radius: 50%;
   font-size: 0.75rem;
   width: 18px;
@@ -146,7 +147,7 @@ h1.site-title {
 }
 
 .account-link {
-  color: #333;
+  color: var(--header-foreground);
   text-decoration: none;
   font: inherit;
   transition: opacity 0.2s;
@@ -160,7 +161,7 @@ h1.site-title {
 .account-link:hover {
   opacity: 0.7;
   text-decoration: underline;
-  background-color: #f5f5f5;
+  background-color: var(--header-bg);
 }
 
 .cart-link {
@@ -169,10 +170,12 @@ h1.site-title {
   align-items: center;
   padding: 6px;
   border-radius: 4px;
+  color: var(--color-foreground);
 }
 
 .cart-link:hover {
-  background-color: #f5f5f5;
+  background-color: var(--header-bg);
+  opacity: 0.7;
 }
 
 .cart-link svg,
@@ -180,7 +183,7 @@ h1.site-title {
   width: 24px;
   height: 24px;
   display: block;
-  color: black;
+  color: var(--header-foreground);
 } 
 
 /* Mobile-Menu */
@@ -244,7 +247,7 @@ h1.site-title {
     left: 0;
     width: 300px;
     height: 100%;
-    background: white;
+    background: var(--header-bg);
     padding: 40px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1001;
@@ -267,6 +270,7 @@ h1.site-title {
     border: none;
     cursor: pointer;
     padding: 2px;
+    color: var(--header-foreground);
   }
   
   .mobile-dropdown-toggle {
@@ -275,16 +279,14 @@ h1.site-title {
     align-items: center;
     width: 100%;
     background: none;
+    color: var(--header-foreground);
     border: none;
     text-align: left;
     padding: 15px 0;
     font-size: 1rem;
+    font-family: var(--font-body-family);
     cursor: pointer;
     border-bottom: 1px solid gainsboro;
-  }
-  
-  .mobile-dropdown-toggle:focus {
-    outline: 2px solid #007aff;
   }
   
   .mobile-dropdown-icon {
@@ -311,16 +313,11 @@ h1.site-title {
   .mobile__dropdown__link {
     display: block;
     padding: 15px 0;
-    color: #333;
+    color: var(--header-foreground);
     text-decoration: none;
     border-bottom: 1px solid gainsboro;
   }
-  
-  .mobile__nav__link:focus,
-  .mobile__dropdown__link:focus {
-    outline: 2px solid #007aff;
-  }
-  
+
   .header__utilities {
     order: 2;
   }
@@ -347,3 +344,44 @@ h1.site-title {
   }
 
 }
+
+
+/* Desktop & Mobile Logo */
+.site-logo {
+  display: none;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Show desktop logo */
+.desktop-logo {
+  display: block;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .desktop-logo {
+    display: none;
+  }
+  .mobile-logo {
+    display: block;
+  }
+}
+
+/* Dark mode override */
+.theme-dark .site-logo {
+  display: none !important;
+}
+.theme-dark .dark-logo {
+  display: block !important;
+}
+
+/* Fallback text */
+.site-logo--text {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--header-foreground);
+}
+
+
