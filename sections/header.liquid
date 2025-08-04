@@ -2,52 +2,54 @@
 
 
 
-<header class="site-header" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }};">
-  <div class="container header__container">
+<header class="site-header logo-{{ settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
+  <div class="container header__container logo-position--{{ section.settings.logo_position }}">
 
     <!-- Store name -->
-    <h1 class="site-title" style="max-width: {{ section.settings.logo_max_width }}px;">
+    <div class="logo-wrapper">
+      <h1 class="site-title" style="max-width: {{ settings.logo_max_width }}px;">
       <a href="{{ routes.root_url }}" class="site-title__link" style="display: flex; align-items: center;">
     
-        {%- if section.settings.logo_image != blank -%}
+        {%- if settings.logo_image != blank -%}
           <img
-            src="{{ section.settings.logo_image | img_url: 'medium' }}"
+            src="{{ settings.logo_image | img_url: 'medium' }}"
             class="site-logo desktop-logo"
             alt="{{ shop.name | escape }}"
-            width="{{ section.settings.logo_max_width }}"
+            width="{{ settings.logo_max_width }}"
             height="auto"
             loading="lazy"
           >
         {%- endif -%}
 
-        {%- if section.settings.mobile_logo_image != blank -%}
+        {%- if settings.mobile_logo_image != blank -%}
           <img
-            src="{{ section.settings.mobile_logo_image | img_url: 'medium' }}"
+            src="{{ settings.mobile_logo_image | img_url: 'medium' }}"
             class="site-logo mobile-logo"
             alt="{{ shop.name | escape }}"
-            width="{{ section.settings.logo_max_width }}"
+            width="{{ settings.logo_max_width }}"
             height="auto"
             loading="lazy"
           >
         {%- endif -%}
  
-        {%- if section.settings.dark_logo_image != blank -%}
+        {%- if settings.dark_logo_image != blank -%}
           <img
-            src="{{ section.settings.dark_logo_image | img_url: 'medium' }}"
+            src="{{ settings.dark_logo_image | img_url: 'medium' }}"
             class="site-logo dark-logo"
             alt="{{ shop.name | escape }}"
-            width="{{ section.settings.logo_max_width }}"
+            width="{{ settings.logo_max_width }}"
             height="auto"
             loading="lazy"
           >
         {%- endif -%}
 
-        {%- unless section.settings.logo_image or section.settings.mobile_logo_image -%}
+        {%- unless settings.logo_image or settings.mobile_logo_image or settings.dark_logo_image -%}
           <span class="site-logo--text">{{ shop.name }}</span>
         {%- endunless -%}
 
       </a>
-    </h1>
+      </h1>
+    </div>
 
     <!-- Mobile-Menu-icon -->
     <div class="mobile-menu-icon">
@@ -185,34 +187,40 @@
   "name": "t:general.header",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "logo_image",
-      "label": "Desktop Logo"
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_logo_image",
-      "label": "Mobile Logo"
-    },
-    {
-      "type": "image_picker",
-      "id": "dark_logo_image",
-      "label": "Dark Mode Logo"
-    },
-    {
-      "type": "range",
-      "id": "logo_max_width",
-      "label": "Max logo width (PX)",
-      "min": 100,
-      "max": 400,
-      "step": 10,
-      "default": 200
-    },
-    {
       "type": "link_list",
       "id": "menu",
       "default": "main-menu",
       "label": "t:labels.menu"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo Position",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
     }
   ]
 }

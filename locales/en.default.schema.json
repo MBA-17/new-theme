@@ -72,5 +72,13 @@
       "subtitle": "Subtitle",
       "normal": "Normal text"
     },
+  },
+  "sections": {
+    "all": {
+      "padding": {
+        "padding_top": "Top padding",
+        "padding_bottom": "Bottom padding"
+      }
+    },
   }
 }
