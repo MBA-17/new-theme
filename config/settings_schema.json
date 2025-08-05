@@ -33,6 +33,12 @@
         "max": 200,
         "step": 4,
         "default": 100
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Displayed at 32 x 32px"
       }
     ]
   },
