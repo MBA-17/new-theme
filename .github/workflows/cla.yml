@@ -1,22 +1,42 @@
+# name: Contributor License Agreement (CLA)
+
+# on:
+#   pull_request:
+#     types: [opened, synchronize]
+#   issue_comment:
+#     types: [created]
+
+# jobs:
+#   cla:
+#     runs-on: ubuntu-latest
+#     if: |
+#       (github.event.issue.pull_request
+#         && !github.event.issue.pull_request.merged_at
+#         && contains(github.event.comment.body, 'signed')
+#       )
+#       || (github.event.pull_request && !github.event.pull_request.merged)
+#     steps:
+#       - uses: Shopify/shopify-cla-action@v1
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           cla-token: ${{ secrets.CLA_TOKEN }}
+
 name: Contributor License Agreement (CLA)
 
 on:
   pull_request:
-    types: [opened, synchronize]
-  issue_comment:
-    types: [created]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   cla:
     runs-on: ubuntu-latest
-    if: |
-      (github.event.issue.pull_request
-        && !github.event.issue.pull_request.merged_at
-        && contains(github.event.comment.body, 'signed')
-      )
-      || (github.event.pull_request && !github.event.pull_request.merged)
     steps:
-      - uses: Shopify/shopify-cla-action@v1
+      - name: Run CLA Check
+        uses: Shopify/shopify-cla-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cla-token: ${{ secrets.CLA_TOKEN }}
