@@ -1,23 +1,40 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1>{{ '404.title' | t }}</h1>
+<h1>{{ section.settings.title }}</h1>
 
 <p>
-  {{ '404.not_found' | t }}
+  {{ section.settings.notfound }}
 </p>
 
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
+<a href="{{ section.settings.button_link_404 }}">
+  {{ section.settings.button_text_404 }}
 </a>
 
 {% schema %}
 {
   "name": "t:general.404",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "404 Title",
+      "default": "Set Title"
+    },
+    {
+      "type": "richtext",
+      "id": "notfound",
+      "label": "404 subtext",
+      "default": "<p>Page not found</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text_404",
+      "label": "Button text",
+      "default": "Back to Shopping"
+    },
+    {
+      "type": "url",
+      "id": "button_link_404",
+      "label": "Button link"
+    }
+  ]
 }
 {% endschema %}
