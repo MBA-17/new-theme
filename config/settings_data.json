@@ -11,8 +11,8 @@
   "current": {
     "logo_max_width": 144,
     "type_primary_font": "anton_n4",
-    "background_color": "#000000",
-    "foreground_color": "#ffffff",
+    "background_color": "#ffffff",
+    "foreground_color": "#000000",
     "content_for_index": []
   }
 }
