@@ -12,7 +12,7 @@
     
         {%- if settings.logo_image != blank -%}
           <img
-            src="{{ settings.logo_image | img_url: 'medium' }}"
+            src="{{ settings.logo_image | image_url: 'medium' }}"
             class="site-logo desktop-logo"
             alt="{{ shop.name | escape }}"
             width="{{ settings.logo_max_width }}"
@@ -23,7 +23,7 @@
 
         {%- if settings.mobile_logo_image != blank -%}
           <img
-            src="{{ settings.mobile_logo_image | img_url: 'medium' }}"
+            src="{{ settings.mobile_logo_image | image_url: 'medium' }}"
             class="site-logo mobile-logo"
             alt="{{ shop.name | escape }}"
             width="{{ settings.logo_max_width }}"
@@ -34,7 +34,7 @@
  
         {%- if settings.dark_logo_image != blank -%}
           <img
-            src="{{ settings.dark_logo_image | img_url: 'medium' }}"
+            src="{{ settings.dark_logo_image | image_url: 'medium' }}"
             class="site-logo dark-logo"
             alt="{{ shop.name | escape }}"
             width="{{ settings.logo_max_width }}"
