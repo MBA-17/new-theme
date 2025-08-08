@@ -12,6 +12,7 @@
     "logo_image": "shopify://shop_images/Zoro1.png",
     "mobile_logo_image": "shopify://shop_images/Zoro1.png",
     "logo_max_width": 144,
+    "favicon": "shopify://shop_images/Zoro1.png",
     "content_for_index": []
   }
 }
