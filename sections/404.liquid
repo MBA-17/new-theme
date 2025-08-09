@@ -1,40 +1,119 @@
-<h1>{{ section.settings.title }}</h1>
+{{ '404.css' | asset_url | stylesheet_tag }}
 
-<p>
-  {{ section.settings.notfound }}
-</p>
+<div class="main-404-container" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px; --bg-404{{ settings.background_color }}; --text-404:{{ settings.foreground_color }};">
+  <div class="container_404" style="--text-align:{{ section.settings.text_align }};">
+    <{{section.settings.title_tag}}>{{ section.settings.title }}</{{ section.settings.title_tag }}>
+    <h2>{{ section.settings.notfound }}</h2>
+    <p>{{ section.settings.message }}</p>
+    <a class="btn-404" href="{{ section.settings.button_link_404 }}">{{ section.settings.button_text_404 }}</a>
+  </div>
+</div>  
 
-<a href="{{ section.settings.button_link_404 }}">
-  {{ section.settings.button_text_404 }}
-</a>
 
 {% schema %}
 {
   "name": "t:general.404",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "bg_img_404",
+      "label": "Background Image"
+    },
+    {
+      "type": "select",
+      "id": "bg_height",
+      "label": "Background Height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Title Heading Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
+    {
       "type": "text",
       "id": "title",
-      "label": "404 Title",
-      "default": "Set Title"
-    },
-    {
-      "type": "richtext",
-      "id": "notfound",
-      "label": "404 subtext",
-      "default": "<p>Page not found</p>"
+      "label": "Page Title",
+      "default": "404"
     },
     {
       "type": "text",
-      "id": "button_text_404",
-      "label": "Button text",
-      "default": "Back to Shopping"
+      "id": "notfound",
+      "label": "Not Found Message",
+      "default": "Oops, Page Not Found"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "Page that you're looking for isn't found"
     },
     {
       "type": "url",
       "id": "button_link_404",
-      "label": "Button link"
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text_404",
+      "label": "Button Text",
+      "default": "Back to Home"
+    },
+    {  
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
     }
   ]
 }
+
 {% endschema %}
