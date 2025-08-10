@@ -1,4 +1,5 @@
 .main-404-container{
+    position:relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,46 +7,127 @@
     padding-bottom: var(--padding-404-bottom);
     background: var(--bg-404);
     color: var(--text-404);
+    width: 100%;
+    overflow: hidden;
 }
 
-.container_404 {
+.bg-image-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, calc(var(--overlay-opacity) / 100));
+  pointer-events: none; /* so clicks pass through */
+}
+
+/* Height control */
+.main-404-container.small { min-height: 200px; }
+.main-404-container.medium { min-height: 400px; }
+.main-404-container.large { min-height: 600px; }
+
+/* Gradient Slide Animation */
+.main-404-container.anim-gradient-slide {
+  background: linear-gradient(270deg, #22b455, #1dd1a1, #22b455);
+  background-size: 600% 600%;
+  animation-name: gradientSlide;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Pulse Animation */
+.main-404-container.anim-pulse {
+  animation-name: pulseBg;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulseBg {
+  0%, 100% { filter: brightness(100%); }
+  50% { filter: brightness(120%); }
+}
+
+/* Wave Animation */
+.main-404-container.anim-wave {
+  background: linear-gradient(45deg, #22b455, #1dd1a1);
+  background-size: 200% 200%;
+  animation-name: waveBg;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes waveBg {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Speed Controls */
+.speed-slow   { animation-duration: 20s; }
+.speed-medium { animation-duration: 10s; }
+.speed-fast   { animation-duration: 5s; }
+
+.container_404-content {
   width: 550px;
   height: 350px;
   border-radius: 50px;
-  background: #e0e0e0;
-  box-shadow: 12px 12px 23px #bebebe, -12px -12px 23px #fff;
+  background: var(--main-bg);
   text-align: var(--text-align);
   padding: 20px;
 }
-.container_404 h1,h3,h4,h5,h6 {
+
+.container_404-content.has-shadow{
+  box-shadow: 12px 12px 23px #bebebe, -12px -12px 23px #fff;
+}
+
+.container_404-content h1.title {
   font-size: 10rem;
-  background: linear-gradient(45deg, #22b455, #1dd1a1) center;
+  background: var(--heading-color);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   font-weight: 750;
 }
-.container_404 h2 {
-  color: #204829;
+.container_404-content h2.sub-404 {
+  color: var(--not-found);
   margin-top: -10px;
   margin-bottom: 10px;
 }
-.container_404 p {
-  color: #204829;
+.container_404-content p.para-404 {
+  color: var(--message-color);
   font-weight: 450;
   margin: 10px;
 }
-.container_404 .btn-404 {
+
+.btn-404-container {
+    margin: 25px;
+}
+
+.container_404-content .btn-404 {
   padding: 12px 24px;
   border-radius: 20%;
   border: none;
-  background: linear-gradient(to left, #22b455, #1dd1a1, #22b455);
+  background: var(--btn-bg);
   background-size: 200%;
-  color: white;
+  color: var(--btn-text);
   cursor: pointer;
   transition: 0.3s linear;
   text-decoration: none;
 }
-.container_404 .btn:hover {
+.container_404-content .btn-404:hover {
   background-position: right;
 }
