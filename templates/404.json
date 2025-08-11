@@ -18,7 +18,7 @@
         "main_bg_color": "#ffffff",
         "overlay_opacity": 30,
         "text_align": "center",
-        "enable_box_shadow": true,
+        "enable_box_shadow": false,
         "title": "404",
         "title_tag": "h1",
         "heading_color": "#000000",
