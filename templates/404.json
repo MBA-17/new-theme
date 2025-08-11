@@ -12,7 +12,7 @@
     "main": {
       "type": "404",
       "settings": {
-        "bg_height": "medium",
+        "bg_height": "large",
         "background_animation": "none",
         "background_animation_speed": "medium",
         "main_bg_color": "#ffffff",
