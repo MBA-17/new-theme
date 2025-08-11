@@ -1,27 +1,31 @@
 {{ '404.css' | asset_url | stylesheet_tag }}
 
-<div class="main-404-container {{ section.settings.bg_height }} anim-{{ section.settings.background_animation }} speed-{{ section.settings.background_animation_speed }}" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px; --bg-404{{ settings.background_color }}; --text-404:{{ settings.foreground_color }}; --overlay-opacity:{{ section.settings.overlay_opacity }};">
+{% if template.name == '404' %}
+ <div class="main-404-container {{ section.settings.bg_height }} anim-{{ section.settings.background_animation }} speed-{{ section.settings.background_animation_speed }} bg-type-{{ section.settings.background_type }}" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px; --bg-404:{{ section.settings.background_color }}; --text-404:{{ settings.foreground_color }}; --overlay-opacity:{{ section.settings.overlay_opacity }};">
+  
+  {% if section.settings.background_type == 'image' %}
+    <div class="bg-image-wrapper">
+     <img 
+       src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
+       alt="{{ section.settings.title | escape }}"
+       class="bg-image"
+     >
+       <div class="bg-overlay"></div>
+    </div>
+  {% endif %} 
 
-  <div class="bg-image-wrapper">
-    <img 
-      src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
-      alt="{{ section.settings.title | escape }}"
-      class="bg-image"
-    >
-      <div class="bg-overlay"></div>
-  </div>
-
-  <div class="container_404-content {% if section.settings.enable_box_shadow %} has-shadow{% endif %}" style="--text-align:{{ section.settings.text_align }}; --main-bg:{{ section.settings.main_bg_color }};">
+  <div class="container_404-content {% if section.settings.enable_box_shadow %} has-shadow{% endif %}" style="--text-align:{{ section.settings.text_align }}; --main-bg:{{ section.settings.main_bg_color }}; --container-radius:{{ section.settings.container_radius }}%;">
     <{{section.settings.title_tag}} class="title" style="--heading-color:{{ section.settings.heading_color }};">{{ section.settings.title }}</{{ section.settings.title_tag }}>
     <h2 class="sub-404" style="--not-found:{{ section.settings.not_found_color }};">{{ section.settings.notfound }}</h2>
     <p class="para-404" style="--message-color:{{ section.settings.message_color }};">{{ section.settings.message }}</p>
 
     <div class="btn-404-container">
-    <a class="btn-404" href="{{ section.settings.button_link_404 }}" style="--btn-bg:{{ section.settings.bg_color }}; --btn-text:{{ section.settings.text_color }};">{{ section.settings.button_text_404 }}</a>
+    <a class="btn-404" href="{{ section.settings.button_link_404 }}" style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">{{ section.settings.button_text_404 }}</a>
     </div>
 
   </div>
-</div>  
+ </div>
+{% endif %}  
 
 
 {% schema %}
@@ -29,9 +33,25 @@
   "name": "t:general.404",
   "settings": [
     {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        { "value": "color", "label": "Color" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "color"
+    },
+    {
       "type": "image_picker",
       "id": "bg_img_404",
       "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#e0e0e0"
     },
     {
       "type": "select",
@@ -70,8 +90,18 @@
     {
       "type": "color",
       "id": "main_bg_color",
-      "label": "Background Color",
-      "default": "#000000"
+      "label": "Container Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "label": "Container Radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 10
     },
     {
       "type": "range",
@@ -168,9 +198,21 @@
     },
     {
       "type": "color",
+      "id": "bg_hover_color",
+      "label": "Button Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
       "id": "text_color",
       "label": "Button Text",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_hover_color",
+      "label": "Button Text Hover Color",
+      "default": "#ffffff"
     },
     {  
       "type": "range",
