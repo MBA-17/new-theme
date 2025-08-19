@@ -34,13 +34,13 @@
 }
 
 /* Height control */
-.main-404-container.small { min-height: 200px; }
-.main-404-container.medium { min-height: 400px; }
-.main-404-container.large { min-height: 600px; }
+.full-404-container.small { min-height: 200px; }
+.full-404-container.medium { min-height: 400px; }
+.full-404-container.large { min-height: 600px; }
 
 
 /* Gradient Slide Animation */
-.main-404-container.anim-gradient-slide {
+.full-404-container.anim-gradient-slide {
   background: linear-gradient(270deg, #22b455, #1dd1a1, #22b455);
   background-size: 600% 600%;
   animation-name: gradientSlide;
@@ -55,7 +55,7 @@
 }
 
 /* Pulse Animation */
-.main-404-container.anim-pulse {
+.full-404-container.anim-pulse {
   animation-name: pulseBg;
   animation-iteration-count: infinite;
 }
@@ -66,7 +66,7 @@
 }
 
 /* Wave Animation */
-.main-404-container.anim-wave {
+.full-404-container.anim-wave {
   background: linear-gradient(45deg, #22b455, #1dd1a1);
   background-size: 200% 200%;
   animation-name: waveBg;
@@ -113,11 +113,11 @@
 .container_404-content p.para-404 {
   color: var(--message-color);
   font-weight: 450;
-  margin: 10px;
+  margin-bottom: 10px;
 }
 
 .btn-404-container {
-    margin: 25px;
+    margin: 25px auto;
 }
 
 .container_404-content .btn-404 {
@@ -135,3 +135,62 @@
   background-position: right;
   color: var(--btn-text-hover);
 }
+
+
+/* Responsive 404 Section */
+@media (max-width: 1024px) {
+  .container_404-content {
+    width: 80%;
+    height: auto;
+    padding: 30px 20px;
+  }
+  .container_404-content h1.title {
+    font-size: 8rem;
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.5rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-404-container {
+    flex-direction: column;
+    padding: 40px 15px;
+  }
+  .container_404-content {
+    width: 100%;
+    height: auto;
+    padding: 20px 15px;
+  }
+  .container_404-content h1.title {
+    font-size: 6rem; /* reduced for tablet */
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.3rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 0.95rem;
+  }
+  .container_404-content .btn-404{
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container_404-content {
+    padding: 15px 12px;
+  }
+  .container_404-content h1.title {
+    font-size: 4rem; /* reduced for small screens */
+  }
+  .container_404-content h2.sub-404 {
+    font-size: 1.1rem;
+  }
+  .container_404-content p.para-404 {
+    font-size: 0.9rem;
+  }
+}
+

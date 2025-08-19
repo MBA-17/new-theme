@@ -1,7 +1,9 @@
+{{ 'critical.css' | asset_url | stylesheet_tag }}
 {{ '404.css' | asset_url | stylesheet_tag }}
 
 {% if template.name == '404' %}
- <div class="main-404-container {{ section.settings.bg_height }} anim-{{ section.settings.background_animation }} speed-{{ section.settings.background_animation_speed }} bg-type-{{ section.settings.background_type }}" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px; --bg-404:{{ section.settings.background_color }}; --text-404:{{ settings.foreground_color }}; --overlay-opacity:{{ section.settings.overlay_opacity }};">
+<div class="full-404-container shopify-section full-width {{ section.settings.bg_height }} anim-{{ section.settings.background_animation }} speed-{{ section.settings.background_animation_speed }} bg-type-{{ section.settings.background_type }}" style="--bg-404:{{ section.settings.background_color }}; --text-404:{{ settings.foreground_color }}; --overlay-opacity:{{ section.settings.overlay_opacity }};">
+ <div class="main-404-container full-width" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px;">
   
   {% if section.settings.background_type == 'image' %}
     <div class="bg-image-wrapper">
@@ -15,7 +17,7 @@
   {% endif %} 
 
   <div class="container_404-content {% if section.settings.enable_box_shadow %} has-shadow{% endif %}" style="--text-align:{{ section.settings.text_align }}; --main-bg:{{ section.settings.main_bg_color }}; --container-radius:{{ section.settings.container_radius }}%;">
-    <{{section.settings.title_tag}} class="title" style="--heading-color:{{ section.settings.heading_color }};">{{ section.settings.title }}</{{ section.settings.title_tag }}>
+    <h1 class="title" style="--heading-color:{{ section.settings.heading_color }};">{{ section.settings.title }}</h1>
     <h2 class="sub-404" style="--not-found:{{ section.settings.not_found_color }};">{{ section.settings.notfound }}</h2>
     <p class="para-404" style="--message-color:{{ section.settings.message_color }};">{{ section.settings.message }}</p>
 
@@ -25,6 +27,7 @@
 
   </div>
  </div>
+</div> 
 {% endif %}  
 
 
@@ -134,20 +137,6 @@
       "id": "title",
       "label": "Page Title",
       "default": "404"
-    },
-    {
-      "type": "select",
-      "id": "title_tag",
-      "label": "Title Heading Tag",
-      "options": [
-        { "value": "h1", "label": "H1" },
-        { "value": "h2", "label": "H2" },
-        { "value": "h3", "label": "H3" },
-        { "value": "h4", "label": "H4" },
-        { "value": "h5", "label": "H5" },
-        { "value": "h6", "label": "H6" }
-      ],
-      "default": "h1"
     },
     {
       "type": "color",

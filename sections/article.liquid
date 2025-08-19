@@ -10,7 +10,7 @@
   {{ article.image | image_url: width: 1000 | image_tag }}
 {% endif %}
 
-<h1>{{ article.title }}</h1>
+<h1 class="title">{{ article.title }}</h1>
 
 {% assign date = article.published_at | time_tag: format: 'date' %}
 <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
