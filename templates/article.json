@@ -19,15 +19,21 @@
           }
         },
         "title": {
-          "type": "title"
-        },
-        "content": {
-          "type": "content"
+          "type": "title",
+          "settings": {
+            "title_align": "left"
+          }
         },
         "share": {
           "type": "share",
           "settings": {
             "share_label": "Share"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "enable_dropcap": false
           }
         }
       },
@@ -37,7 +43,12 @@
         "share",
         "content"
       ],
-      "settings": {}
+      "settings": {
+        "enabled_image": true,
+        "enabled_auth": false,
+        "enabled_date": false,
+        "enabled_title": false
+      }
     }
   },
   "order": [
