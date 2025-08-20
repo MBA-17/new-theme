@@ -33,7 +33,7 @@
         "content": {
           "type": "content",
           "settings": {
-            "enable_dropcap": false
+            "enable_dropcap": true
           }
         }
       },
