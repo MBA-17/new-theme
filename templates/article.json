@@ -21,7 +21,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_align": "center"
+            "title_align": "right"
           }
         },
         "share": {
