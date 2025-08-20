@@ -45,9 +45,9 @@
       ],
       "settings": {
         "enabled_image": true,
-        "enabled_auth": false,
-        "enabled_date": false,
-        "enabled_title": false
+        "enabled_auth": true,
+        "enabled_date": true,
+        "enabled_title": true
       }
     }
   },
