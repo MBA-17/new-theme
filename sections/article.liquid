@@ -1,6 +1,6 @@
 {{ 'article.css' | asset_url | stylesheet_tag }}
-
-{% for block in section.blocks %}
+<article class="main-article" style="--article-bg:{{ settings.background_color }}; --article-text:{{ settings.foreground_color }};">
+  {% for block in section.blocks %}
   {% case block.type %}
 
    {% when 'featured_image' %}
@@ -14,28 +14,43 @@
       {% endif %}
 
    {% when 'title' %}
+      
+      <header class="title-align-{{ block.settings.title_align }}">
 
-      {% if section.settings.enabled_title %}
-        <header class="title-align-{{ block.settings.title_align }}">
-          <h1 class="title">{{ article.title | escape }}</h1>
+            {% if section.settings.enabled_title %}
+             <h1 class="title">{{ article.title | escape }}</h1>
+            {% endif %}
 
           <div class="article-meta">
             {% if section.settings.enabled_date %}
               <span class="meta-item">
-                <svg class="meta-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 7H5v10h14V9Z"/></svg>
+                <svg class="meta-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 7H5v10h14V9Z"/></svg>
                 {{- article.published_at | time_tag: format: 'date' -}}
               </span>
             {% endif %}
 
             {% if section.settings.enabled_auth %}
-              <span class="meta-item">
-               <svg class="meta-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"/></svg>
-               {{ article.author }}
+              <span class="meta-item author-block">
+                {% if section.settings.author_icon != blank %}
+                 <img 
+                    src="{{ section.settings.author_icon | image_url: width: 48 }}" 
+                    srcset="
+                      {{ section.settings.author_icon | image_url: width: 48 }} 1x,
+                      {{ section.settings.author_icon | image_url: width: 96 }} 2x,
+                      {{ section.settings.author_icon | image_url: width: 144 }} 3x
+                    "
+                    alt="{{ section.settings.author_name | escape }}" 
+                    class="author-icon"
+                    width="24" height="24"
+                    loading="lazy"
+                  >
+                {% endif %}
+                {{ article.author }}
               </span>
             {% endif %}
+
           </div>
-        </header>
-      {% endif %}
+      </header>
 
    {% when 'content' %}
 
@@ -45,10 +60,10 @@
 
    {% when 'share' %}
       {% assign share_url = shop.url | append: article.url %}
-  {% assign share_title = article.title | url_param_escape %}
-  {% assign share_image = article.image | image_url: width: 1200 %}
+      {% assign share_title = article.title | url_param_escape %}
+      {% assign share_image = article.image | image_url: width: 1200 %}
 
-  <div class="share-bar">
+  <div class="share-bar" style="--share-background:{{ block.settings.share_bg }}; --share-border:{{ block.settings.share_dc }}; --share-justify:{{ block.settings.share_alignment }};">
     <span class="share-label">{{ block.settings.share_label }}</span>
 
     <a class="share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Facebook">F</a>
@@ -68,11 +83,10 @@
      
   {% endcase %}
 
-{% endfor %}
+  {% endfor %}
 
 
-
-{% if blog.comments_enabled? %}
+  {% if blog.comments_enabled? %}
   <h2>{{ 'blog.article_comments' | t }}</h2>
 
   <div id="comments">
@@ -113,12 +127,17 @@
 
     <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
   {% endform %}
-{% endif %}
+  {% endif %}
+</article>
 
 {% schema %}
 {
   "name": "t:general.article",
   "settings": [
+    {
+      "type": "header",
+      "content": "Article Meta Settings"
+    },
     {
       "type": "checkbox",
       "id": "enabled_image",
@@ -130,6 +149,11 @@
       "id": "enabled_auth",
       "label": "Show Author",
       "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "author_icon",
+      "label": "Author icon"
     },
     {
       "type": "checkbox",
@@ -221,6 +245,50 @@
           "id": "share_label",
           "label": "Text",
           "default": "Share Button"
+        },
+        {
+          "type": "color",
+          "id": "share_bg",
+          "label": "Share Bar Background",
+          "default": "#f7f7f8"
+        },
+        {
+          "type": "color",
+          "id": "share_dc",
+          "label": "Share Bar Border",
+          "default": "#eee"
+        },
+        {
+          "type": "select",
+          "id": "share_alignment",
+          "label": "Share Bar Alignment",
+          "options": [
+            {
+              "value": "flex-start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "flex-end",
+              "label": "Right"
+            },
+            {
+              "value": "space-between",
+              "label": "Space Between"
+            },
+            {
+              "value": "space-around",
+              "label": "Space Around"
+            },
+            {
+              "value": "space-evenly",
+              "label": "Space Evenly"
+            }
+          ],
+          "default": "flex-start"
         }
       ]
     }

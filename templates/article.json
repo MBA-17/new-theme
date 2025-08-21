@@ -27,7 +27,10 @@
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "share_label": "Share",
+            "share_bg": "#f7f7f8",
+            "share_dc": "#eee",
+            "share_alignmen": "flex-start"
           }
         },
         "content": {
