@@ -10,12 +10,19 @@
          <div class="article-image-wrapper image-{{ block.settings.image_height }}">
            {{ article.image | image_url: width: 1500 | image_tag: class: 'article-image' }}
          </div>
+
+         {% else %}
+          {% assign placeholder_image = 'lifestyle-2' %}
+          <div class="article-image-wrapper image-{{ block.settings.image_height }}">
+           {{ placeholder_image | placeholder_svg_tag: "article-image-wrapper"}}
+         </div>
+
         {% endif %}
       {% endif %}
 
    {% when 'title' %}
       
-      <header class="title-align-{{ block.settings.title_align }}">
+      <header class="article-head title-align-{{ block.settings.title_align }}">
 
             {% if section.settings.enabled_title %}
              <h1 class="title">{{ article.title | escape }}</h1>
@@ -86,11 +93,12 @@
   {% endfor %}
 
 
-  {% if blog.comments_enabled? %}
-  <h2>{{ 'blog.article_comments' | t }}</h2>
+  {% comment %} {% if blog.comments_enabled? %}
+    <div class="article_comments_wrapper" style="--comment-bg:{{ settings.background_color }} --comment-text:{{ settings.foreground_color }}">  
+     <h2>{{ 'blog.article_comments' | t }}</h2>
 
-  <div id="comments">
-    {% paginate article.comments by 10 %}
+     <div id="comments">
+      {% paginate article.comments by 10 %}
       {% for comment in article.comments %}
         <div>
           <p>{{ comment.author }}</p>
@@ -102,33 +110,195 @@
       {% endfor %}
 
       {{ paginate | default_pagination: anchor: 'comments' }}
-    {% endpaginate %}
+      {% endpaginate %}
+     </div>
+
+      {% form 'new_comment', article %}
+       <h2>{{ 'blog.comment_form_title' | t }}</h2>
+
+       {{ form.errors | default_errors }}
+
+        <div class="comments-field">
+          <div>
+            <label for="author">{{ 'blog.comment_form_name' | t }}</label>
+            <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
+          </div>
+
+          <div>
+            <label for="email">{{ 'blog.comment_form_email' | t }}</label>
+            <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
+          </div>
+
+          <div>
+            <label for="body">{{ 'blog.comment_form_body' | t }}</label>
+            <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
+          </div>
+        </div> 
+
+        <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
+      {% endform %}
+    </div>
+  {% endif %} {% endcomment %}
+
+  {% if blog.comments_enabled? %}
+   <div class="article_comments_wrapper">
+     <h2>{{ 'blog.article_comments' | t }}</h2>
+
+     {% if article.comments_count > 0 %}
+      <div id="comments">
+        {% paginate article.comments by 5 %}
+          {% for comment in article.comments %}
+            <div class="article-comment">
+              <p class="comment-author">{{ comment.author }}</p>
+              <p class="comment-date">
+                {{- comment.created_at | time_tag: format: 'date' -}}
+              </p>
+              <div class="comment-content">{{ comment.content }}</div>
+            </div>
+          {% endfor %}
+    
+          {{ paginate | default_pagination: anchor: 'comments' }}
+        {% endpaginate %}
+      </div>
+    {% endif %}
+
+    {% form 'new_comment', article %}
+      <h2>{{ 'blog.comment_form_title' | t }}</h2>
+
+      {{ form.errors | default_errors }}
+
+      <div class="comments-field">
+        <div>
+          <label for="author">{{ 'blog.comment_form_name' | t }}</label>
+          <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
+        </div>
+
+        <div>
+          <label for="email">{{ 'blog.comment_form_email' | t }}</label>
+          <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
+        </div>
+
+        <div>
+          <label for="body">{{ 'blog.comment_form_body' | t }}</label>
+          <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
+        </div>
+      </div> 
+
+      <input type="submit" class="comment-form-submit" value="{{ 'blog.comment_form_submit' | t }}">
+    {% endform %}
   </div>
+{% endif %}
 
-  {% form 'new_comment', article %}
-    <h2>{{ 'blog.comment_form_title' | t }}</h2>
-
-    {{ form.errors | default_errors }}
-
-    <div>
-      <label for="author">{{ 'blog.comment_form_name' | t }}</label>
-      <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
-    </div>
-
-    <div>
-      <label for="email">{{ 'blog.comment_form_email' | t }}</label>
-      <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
-    </div>
-
-    <div>
-      <label for="body">{{ 'blog.comment_form_body' | t }}</label>
-      <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
-    </div>
-
-    <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
-  {% endform %}
-  {% endif %}
 </article>
+
+<style>
+  .article_comments_wrapper {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: {{ section.settings.wrapper_bg_color }};
+  }
+
+  .article_comments_wrapper h2 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_font_size }}px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  /* Individual Comment Styling */
+  .article-comment {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid {{ section.settings.comment_border_color }};
+    background-color: {{ section.settings.comment_bg_color }};
+    border-radius: {{ section.settings.corner_radius }}px;
+    {% if section.settings.enable_box_shadow %}
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease;
+    {% endif %}
+  }
+
+  {% if section.settings.enable_box_shadow %}
+  .article-comment:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  {% endif %}
+
+  .article_comments_wrapper .article-comment .comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: {{ section.settings.author_name_color }};
+  }
+
+  .article_comments_wrapper .article-comment .comment-date {
+    font-size: 12px;
+    color: {{ section.settings.body_text_color | color_modify: 'alpha', 0.75 }};
+    margin-bottom: 10px;
+  }
+  
+  .article_comments_wrapper .article-comment .comment-content {
+    color: {{ section.settings.body_text_color }};
+  }
+
+  .comments-field label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: {{ section.settings.body_text_color }};
+  }
+
+  .comments-field input[type="text"],
+  .comments-field input[type="email"],
+  .comments-field textarea {
+    padding: 10px;
+    border: 1px solid {{ section.settings.comment_border_color }};
+    border-radius: {{ section.settings.corner_radius }}px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: {{ section.settings.comment_bg_color }};
+    color: {{ section.settings.body_text_color }};
+  }
+
+  /* Submit Button Styling -- CORRECTED SELECTOR */
+  .article_comments_wrapper .comment-form-submit {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 15px 60px;
+    border: none;
+    border-radius: {{ section.settings.corner_radius }}px;
+    cursor: pointer;
+    font-size: 16px;
+    
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+
+  /* CORRECTED HOVER STATE SELECTOR */
+  .article_comments_wrapper .comment-form-submit:hover {
+    background-color: {{ section.settings.button_bg_color | color_darken: 10 }};
+  }
+
+  /* Pagination Styling */
+  .pagination a, .pagination span {
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid {{ section.settings.comment_border_color }};
+    text-decoration: none;
+    color: {{ section.settings.author_name_color }};
+    border-radius: {{ section.settings.corner_radius }}px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pagination .current {
+    background-color: {{ section.settings.author_name_color }};
+    color: {{ section.settings.comment_bg_color }};
+    border-color: {{ section.settings.author_name_color }};
+  }
+
+  .pagination a:hover {
+    background-color: {{ section.settings.comment_border_color }};
+  }
+</style>
 
 {% schema %}
 {
@@ -166,6 +336,93 @@
       "id": "enabled_title",
       "label": "Show Title",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Article Comment"
+    },
+    {
+      "type": "color",
+      "id": "wrapper_bg_color",
+      "label": "Wrapper Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "comment_bg_color",
+      "label": "Comment Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "comment_border_color",
+      "label": "Comment Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "author_name_color",
+      "label": "Author Name & Link Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "body_text_color",
+      "label": "Body Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Button Colors"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography & Style"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner Radius",
+      "info": "Applies to comment cards, input fields, and buttons.",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_box_shadow",
+      "label": "Enable Box Shadow on Comments",
+      "default": true
     }
   ],
   "blocks": [

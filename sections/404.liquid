@@ -6,14 +6,22 @@
  <div class="main-404-container full-width" style="--padding-404-top:{{ section.settings.padding_top }}px; --padding-404-bottom:{{ section.settings.padding_bottom }}px;">
   
   {% if section.settings.background_type == 'image' %}
-    <div class="bg-image-wrapper">
-     <img 
-       src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
-       alt="{{ section.settings.title | escape }}"
-       class="bg-image"
-     >
-       <div class="bg-overlay"></div>
-    </div>
+   {% if section.settings.bg_img_404 %}
+     <div class="bg-image-wrapper">
+       <img 
+         src="{{ section.settings.bg_img_404 | image_url: width: 2400 }}"
+         alt="{{ section.settings.title | escape }}"
+         class="bg-image"
+        >
+        <div class="bg-overlay"></div>
+      </div>
+    {% else %}
+      <div class="bg-image-wrapper">
+       {% assign placeholder_image = 'lifestyle-1' %}
+       {{ placeholder_image | placeholder_svg_tag: 'bg-image' }}
+        <div class="bg-overlay"></div>
+      </div>
+    {% endif %}  
   {% endif %} 
 
   <div class="container_404-content {% if section.settings.enable_box_shadow %} has-shadow{% endif %}" style="--text-align:{{ section.settings.text_align }}; --main-bg:{{ section.settings.main_bg_color }}; --container-radius:{{ section.settings.container_radius }}%;">
