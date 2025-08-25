@@ -160,10 +160,9 @@
               </li>
             {% endfor %}
           </ul>
-        </nav>
 
-        <!-- Mobile-account-login -->
-        <div class="mobile-account-links">
+          <!-- Mobile-account-login -->
+          <div class="mobile-account-links">
           {% if customer %}
             <a href="{{ routes.account_url }}" class="account-link" aria-label="My account">
               {{ 'icon-account.svg' | inline_asset_content }}
@@ -173,7 +172,9 @@
             {{ 'Login' | customer_login_link | replace: '<a', '<a class="account-link login-link"' }}
             {{ 'Register' | customer_register_link | replace: '<a', '<a class="account-link register-link"' }}
           {% endif %}
-        </div>
+          </div>
+          
+        </nav>
       </div>
     </div>
 
