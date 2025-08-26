@@ -31,7 +31,8 @@
     "sidebar": "Sidebar",
     "text": "Text",
     "theme": "Theme",
-    "typography": "Typography"
+    "typography": "Typography",
+    "ImageHeight": "Image Height"
   },
   "labels": {
     "alignment": "Alignment",
@@ -47,7 +48,9 @@
     "page_width": "Page width",
     "show_payment_icons": "Show payment icons",
     "text_style": "Text style",
-    "text": "Text"
+    "text": "Text",
+    "textColor": "Text Color",
+    "bgColor": "Background Title"
   },
   "options": {
     "alignment": {
@@ -76,8 +79,8 @@
   "sections": {
     "all": {
       "padding": {
-        "padding_top": "Top padding",
-        "padding_bottom": "Bottom padding"
+        "padding_top": "Top Padding",
+        "padding_bottom": "Bottom Padding"
       }
     },
   }
