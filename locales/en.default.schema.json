@@ -32,7 +32,11 @@
     "text": "Text",
     "theme": "Theme",
     "typography": "Typography",
-    "ImageHeight": "Image Height"
+    "ImageHeight": "Image Height",
+    "card_Grid_Layout": "Card Grid Layout",
+    "desktop_Grid": "Desktop Grid Settings",
+    "tablet_grid_settings": "Tablet Grid Settings",
+    "mobile_grid_settings": "Mobile Grid Settings"
   },
   "labels": {
     "alignment": "Alignment",
@@ -50,7 +54,15 @@
     "text_style": "Text style",
     "text": "Text",
     "textColor": "Text Color",
-    "bgColor": "Background Title"
+    "bgColor": "Background Title",
+    "desktop_Columns": "Desktop Columns",
+    "max_card_width_desktop": "Max Card Width (Desktop)",
+    "table_columns": "Tablet Columns",
+    "max_card_width_tablet": "Max Card Width (Tablet)",
+    "mobile_columns": "Mobile Columns",
+    "max_card_width_mobile": "Max Card Width (Mobile)",
+    "column_gap": "Column Gap",
+    "row_gap": "Row Gap"
   },
   "options": {
     "alignment": {

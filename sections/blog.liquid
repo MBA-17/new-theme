@@ -5,7 +5,7 @@
 
 <!--Blog Card-->
 <div class="blog-card" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
-  {% paginate blog.articles by 3 %}
+  {% paginate blog.articles by 6 %}
   {% for article in blog.articles %}
     <div class="card">
       <div class="card-header">
