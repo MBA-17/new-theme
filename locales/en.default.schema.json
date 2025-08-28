@@ -36,7 +36,8 @@
     "card_Grid_Layout": "Card Grid Layout",
     "desktop_Grid": "Desktop Grid Settings",
     "tablet_grid_settings": "Tablet Grid Settings",
-    "mobile_grid_settings": "Mobile Grid Settings"
+    "mobile_grid_settings": "Mobile Grid Settings",
+    "card_shadow": "Card Shadow"
   },
   "labels": {
     "alignment": "Alignment",
@@ -62,7 +63,11 @@
     "mobile_columns": "Mobile Columns",
     "max_card_width_mobile": "Max Card Width (Mobile)",
     "column_gap": "Column Gap",
-    "row_gap": "Row Gap"
+    "row_gap": "Row Gap",
+    "card_shadow_opacity": "Opacity",
+    "card_shadow_horizontal_offset": "Horizontal offset",
+    "card_shadow_vartical_offset": "Vertical offset",
+    "card_shadow_blur": "Blur"
   },
   "options": {
     "alignment": {

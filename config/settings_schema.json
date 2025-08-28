@@ -112,6 +112,50 @@
         "unit": "px",
         "label": "t:labels.input_corner_radius",
         "default": 4
+      },
+      {
+        "type": "header",
+        "content": "t:general.card_shadow"
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "t:labels.card_shadow_opacity",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "card_horizontal_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:labels.card_shadow_horizontal_offset",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_vertical_offset",
+        "min": -40,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "t:labels.card_shadow_vartical_offset",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "card_shadow_blur",
+        "min": 0,
+        "max": 40,
+        "step": 5,
+        "unit": "px",
+        "label": "t:labels.card_shadow_blur",
+        "default": 0
       }
     ]
   },
@@ -145,7 +189,7 @@
         "type": "range",
         "id": "grid_cards_columns_tablet",
         "min": 1,
-        "max": 4,
+        "max": 3,
         "step": 1,
         "default": 2,
         "label": "t:labels.table_columns"
