@@ -45,7 +45,7 @@
     "foreground": "Foreground",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
-    "input_corner_radius": "Input corner radius",
+    "corner_radius": "Corner Radius",
     "layout_direction": "Layout direction",
     "menu": "Menu",
     "padding": "Padding",

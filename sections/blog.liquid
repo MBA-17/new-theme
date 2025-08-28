@@ -7,7 +7,7 @@
 <div class="blog-card" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
   {% paginate blog.articles by 6 %}
   {% for article in blog.articles %}
-    <div class="card">
+    <div class="card" style="--card-background: {{ section.settings.card_background }};">
       <div class="card-header">
         {% if article.image %}
           <div class="image-{{ section.settings.select_height }}">
@@ -109,6 +109,12 @@
       "type": "image_picker",
       "id": "author_icon",
       "label": "Author icon"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background",
+      "default": "#fff"
     },
     {
       "type": "header",

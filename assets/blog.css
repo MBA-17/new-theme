@@ -33,9 +33,9 @@
 }
 
 .card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background);
+  border-radius: var(--style-border-radius);
+  box-shadow: var(--card-shadow-horizontal-offset, 0px) var(--card-shadow-vertical-offset, 0px) var(--card-shadow-blur, 10px) rgba(0, 0, 0, var(--card-shadow-opacity, 0.1));
   overflow: hidden;
   width: 100%;
   margin: 0 auto; 
@@ -94,7 +94,6 @@
 }
 .blog-title a {
   text-decoration: none;
-  color: black;
   font-size: 18px;
 }
 .card-body p {
