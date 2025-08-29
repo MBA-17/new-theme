@@ -94,13 +94,14 @@
 
 
   {% if blog.comments_enabled? %}
-   <div class="article_comments_wrapper">
-     <h2>{{ 'blog.article_comments' | t }}</h2>
-
-     {% if article.comments_count > 0 %}
-      <div id="comments">
-        {% paginate article.comments by 5 %}
-          {% for comment in article.comments %}
+    <div class="article_comments_wrapper">
+      <h2>{{ 'blog.article_comments' | t }}</h2>
+ 
+      {% paginate article.comments by 1 %}
+        {% if article.comments_count > 0 %}
+          <div id="comments">
+        
+           {% for comment in article.comments %}
             <div class="article-comment">
               <p class="comment-author">{{ comment.author }}</p>
               <p class="comment-date">
@@ -108,18 +109,21 @@
               </p>
               <div class="comment-content">{{ comment.content }}</div>
             </div>
-          {% endfor %}
-          
-          {% comment %} Next comments {% endcomment %}
-          {% if paginate.pages > 1 %}
-             {{ paginate | default_pagination: anchor: 'comments' }}
-          {% endif %}
+           {% endfor %}
 
-        {% endpaginate %}
-      </div>
-    {% endif %}
+          </div>
+        {% endif %}
 
-    {% form 'new_comment', article %}
+        {% comment %} Next comments {% endcomment %}
+            
+             {% if paginate.pages > 1 %}
+              <div class="pagination">
+                {{ paginate | default_pagination: anchor: 'comments' }}
+              </div>  
+             {% endif %} 
+      {% endpaginate %}
+
+      {% form 'new_comment', article %}
       <h2>{{ 'blog.comment_form_title' | t }}</h2>
 
       {{ form.errors | default_errors }}
@@ -142,9 +146,9 @@
       </div> 
 
       <input type="submit" class="comment-form-submit" value="{{ 'blog.comment_form_submit' | t }}">
-    {% endform %}
-  </div>
-{% endif %}
+      {% endform %}
+    </div>
+  {% endif %}
 
 </article>
 
@@ -236,24 +240,23 @@
   }
 
   /* Pagination Styling */
-  .pagination a, .pagination span {
+  .pagination span {
     padding: 8px 12px;
     margin: 0 4px;
     border: 1px solid {{ section.settings.comment_border_color }};
-    text-decoration: none;
-    color: {{ section.settings.author_name_color }};
     border-radius: {{ section.settings.corner_radius }}px;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pagination, a {
+    color: {{ section.settings.author_name_color }};
+    text-decoration: none;
   }
 
   .pagination .current {
     background-color: {{ section.settings.author_name_color }};
     color: {{ section.settings.comment_bg_color }};
     border-color: {{ section.settings.author_name_color }};
-  }
-
-  .pagination a:hover {
-    background-color: {{ section.settings.comment_border_color }};
   }
 </style>
 
