@@ -37,7 +37,8 @@
     "desktop_Grid": "Desktop Grid Settings",
     "tablet_grid_settings": "Tablet Grid Settings",
     "mobile_grid_settings": "Mobile Grid Settings",
-    "card_shadow": "Card Shadow"
+    "card_shadow": "Card Shadow",
+    "social_media_icons": "Social Media"
   },
   "labels": {
     "alignment": "Alignment",
@@ -67,7 +68,23 @@
     "card_shadow_opacity": "Opacity",
     "card_shadow_horizontal_offset": "Horizontal offset",
     "card_shadow_vartical_offset": "Vertical offset",
-    "card_shadow_blur": "Blur"
+    "card_shadow_blur": "Blur",
+    "show_social_icons": "Show Social Icons",
+    "icon_style": "Icon Style",
+    "monochrome_color": "Monochrome (use color below)",
+    "brand_colors": "Brand colors",
+    "icon_size": "Icon Size",
+    "icon_gap": "Icon Gap",
+    "icon_corner_radius": "Icon Corner Radius",
+    "monochrome": "Monochrome Color",
+    "hover_color": "Hover Color",
+    "facebook_url": "Facebook URL",
+    "instagram_url": "Instagram URL",
+    "twitter_url": "Twitter / X URL",
+    "youtube_url": "YouTube URL",
+    "linkedin_url": "LinkedIn URL",
+    "pinterest_url": "Pinterest URL",
+    "tiktok_url": "TikTok URL"
   },
   "options": {
     "alignment": {

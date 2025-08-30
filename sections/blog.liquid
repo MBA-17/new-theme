@@ -4,7 +4,7 @@
 <h1 class="title full-width" style="--title-color:{{ section.settings.title_color }}; --title-bg:{{ section.settings.title_bg }};">{{ blog.title }}</h1>
 
 <!--Blog Card-->
-{% paginate blog.articles by 3 %}
+{% paginate blog.articles by 8 %}
     <div class="blog-card" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
   
      {% for article in blog.articles %}
@@ -22,9 +22,12 @@
            {% endif %}
          </div>
          <div class="card-body text-{{ section.settings.card_alignment }}" style="--card-heading-color: {{ section.settings.card_heading_color }}; --card-text-color: {{ section.settings.card_text_color }}; --card-author-color: {{ section.settings.card_author_name_color }}; --card-date-color: {{ section.settings.card_published_color }};">
+          
+            {% if section.settings.tag_enabled %}
             <span class="tag tag-teal" style="--tag-bg:{{ section.settings.blog_tag_color }}; --tag-text:{{ section.settings.tag_text_color }}; --border-radius:{{ section.settings.tag_corner_radius }}px;">
               {{blog.tags}}
             </span>
+            {% endif %}
 
             <h2 class="blog-title">
               {{article.title | link_to: 'article.url'}}
@@ -67,11 +70,9 @@
      {% endfor %}
     </div>
 
-    {%- if paginate.pages > 1 -%}
       <div class="pagination">
-        {{- paginate | default_pagination -}}
+        {% render 'pagination', pagination: paginate %}
       </div>
-    {%- endif -%}
 {% endpaginate %}  
 
 
@@ -118,6 +119,12 @@
         }
       ],
       "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "tag_enabled",
+      "label": "Enable Tag",
+      "default": false
     },
     {
       "type": "range",

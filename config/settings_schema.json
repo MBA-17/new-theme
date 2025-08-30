@@ -176,7 +176,7 @@
         "max": 400,
         "step": 10,
         "unit": "px",
-        "default": 300,
+        "default": 400,
         "label": "t:labels.max_card_width_mobile"
       },
       {
@@ -241,8 +241,36 @@
         "step": 5,
         "unit": "px",
         "label": "t:labels.card_shadow_blur",
-        "default": 0
+        "default": 10
       }
+    ]
+  },
+  {
+  "name": "t:general.social_media_icons",
+  "settings": [
+      { "type": "checkbox", "id": "show_social_icons", "label": "t:labels.show_social_icons", "default": true },
+
+      { "type": "select", "id": "social_icon_style", "label": "t:labels.icon_style", "default": "mono",
+       "options": [
+         { "value": "mono", "label": "t:labels.monochrome_color" },
+         { "value": "brand", "label": "t:labels.brand_colors" }
+       ]
+      },
+
+      { "type": "range", "id": "social_icon_size", "label": "t:labels.icon_size", "min": 14, "max": 36, "step": 2, "unit": "px", "default": 18 },
+      { "type": "range", "id": "social_icon_gap", "label": "t:labels.icon_gap", "min": 4, "max": 24, "step": 2, "unit": "px", "default": 10 },
+      { "type": "range", "id": "social_icon_radius", "label": "t:labels.icon_corner_radius", "min": 0, "max": 12, "step": 2, "unit": "px", "default": 6 },
+
+      { "type": "color", "id": "social_icon_color", "label": "t:labels.monochrome", "default": "#222222" },
+      { "type": "color", "id": "social_icon_hover_color", "label": "t:labels.hover_color", "default": "#000000" },
+
+      { "type": "text", "id": "social_facebook_url", "label": "t:labels.facebook_url", "placeholder": "https://facebook.com/shopify" },
+      { "type": "text", "id": "social_instagram_url", "label": "t:labels.instagram_url", "placeholder": "https://Instagram.com/shopify" },
+      { "type": "text", "id": "social_twitter_url", "label": "t:labels.twitter_url", "placeholder": "https://Twitter.com/shopify" },
+      { "type": "text", "id": "social_youtube_url", "label": "t:labels.youtube_url", "placeholder": "https://YouTube.com/shopify" },
+      { "type": "text", "id": "social_linkedin_url", "label": "t:labels.linkedin_url", "placeholder": "https://LinkedIn.com/shopify" },
+      { "type": "text", "id": "social_pinterest_url", "label": "t:labels.pinterest_url", "placeholder": "https://Pinterest.com/shopify" },
+      { "type": "text", "id": "social_tiktok_url", "label": "t:labels.tiktok_url", "placeholder": "https://TikTok.com/shopify" }
     ]
   }
 ]
