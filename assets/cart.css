@@ -288,7 +288,6 @@
     content: attr(data-title) ':'; /* Add a colon after the label */
     display: block;
     font-weight: 600;
-    margin-right: 10px; /* Space between label and value */
     color: #444;
     text-transform: capitalize;
     flex-shrink: 0; /* Prevent label from shrinking */
@@ -324,10 +323,7 @@
   .product-name::before {
     margin-bottom: 5px;
   }
-  .product-name a {
-    width: 100%; /* Full width link */
-    text-align: left;
-  }
+  
   .product-name .variation,
   .product-name .item-property {
     text-align: left;
@@ -345,6 +341,11 @@
   }
 
   /* Actions row stacks */
+  .actions-right {
+    margin-left: 0;
+    display: contents;
+}
+
   .actions {
     flex-direction: column;
     align-items: stretch; /* Stretch items to full width */
@@ -354,7 +355,7 @@
 
   .coupon {
     width: 100%;
-    flex-direction: column; /* Stack input and button */
+    /* flex-direction: column;  Stack input and button */
     align-items: stretch;
     gap: 10px;
     max-width: none; /* Remove max width constraint */
@@ -395,9 +396,6 @@
     font-size: 13px;
     margin-bottom: 20px;
   }
-  .shop_table.cart tr {
-    padding: 10px;
-  }
   .shop_table.cart td {
     padding: 15px;
     font-size: 14px;
@@ -409,6 +407,13 @@
     width: 26px;
     height: 26px;
     font-size: 16px;
+  }
+  .coupon {
+    width: 100%;
+    align-items: stretch;
+    gap: 10px;
+    max-width: none;
+    flex-flow: column;
   }
   .coupon .button, .update_cart .button, .checkout_cart .button {
     padding: 10px 15px;
