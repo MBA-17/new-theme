@@ -1,71 +1,160 @@
 {{ 'cart.css' | asset_url | stylesheet_tag }}
 
 {%- if cart.item_count > 0 -%}
-  <div class="product-cart">
-    <h1>{{ 'cart.title' | t }}</h1>
+  <div class="cart-page-wrapper">
+    <h1 class="cart-page-title">SHOPPING BAG</h1>
+    <p class="cart-item-count">
+      {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}
+    </p>
 
-    <form action="{{ routes.cart_url }}" method="post">
-      <table>
+    <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+      <table class="shop_table shop_table_responsive cart" cellspacing="0">
         <thead>
           <tr>
-            <th></th>
-            <th>{{ 'cart.product' | t }}</th>
-            <th>{{ 'cart.quantity' | t }}</th>
-            <th>{{ 'cart.price' | t }}</th>
-            <th>{{ 'cart.total' | t }}</th>
-            <th></th>
+            <th class="product-remove">Remove</th>
+            <th class="product-thumbnail">Image</th>
+            <th class="product-name">Product Title</th>
+            <th class="product-price">Price</th>
+            <th class="product-quantity">Quantity</th>
+            <th class="product-subtotal">Total</th>
           </tr>
         </thead>
         <tbody>
           {% for item in cart.items %}
-            <tr>
-              <td>
-                <a href="{{ item.url }}">{% render 'image', image: item.image, url: item.url, size: '100x100' %}</a>
+            <tr class="cart_item">
+              <!-- Remove -->
+              <td class="product-remove" data-title="Remove">
+                <a href="{{ item.url_to_remove }}" class="remove" aria-label="Remove {{ item.product.title }}">
+                  &times;
+                </a>
               </td>
-              <td>
-                <p><a href="{{ item.url }}">{{ item.product.title }}</a></p>
-                {%- if item.variant.title != 'Default Title' -%}
-                  <p class="product-variant">{{ item.variant.title }}</p>
-                {%- endif -%}
-                <a href="{{ item.url_to_remove }}" class="remove-item">{{ 'cart.remove' | t }}</a>
+
+              <!-- Thumbnail -->
+              <td class="product-thumbnail" data-title="Image">
+                <a href="{{ item.url }}">
+                  <img
+                    src="{{ item.image | image_url: width: 150 }}"
+                    alt="{{ item.image.alt | escape }}"
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                  >
+                </a>
               </td>
-              <td>
-                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="quantity-input">
+
+              <!-- Product name & variant -->
+              <td class="product-name" data-title="Product Title">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                {% if item.variant.title != 'Default Title' %}
+                  <p class="variation">Variant: {{ item.variant.title }}</p>
+                {% endif %}
+                {% for property in item.properties %}
+                  {% if property.last != blank %}
+                    {% unless property.first contains '_' %}
+                      <p class="item-property">{{ property.first }}: {{ property.last }}</p>
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
               </td>
-              <td>{{ item.price | money }}</td>
-              <td>{{ item.line_price | money }}</td>
-              <td></td> {# This column could be for something else, or removed if not needed #}
+
+              <!-- Price -->
+              <td class="product-price" data-title="Price">
+                <span class="amount">{{ item.price | money }}</span>
+              </td>
+
+              <!-- Quantity -->
+              <td class="product-quantity" data-title="Quantity">
+                <div class="quantity">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="input-text qty text"
+                    aria-label="Quantity for {{ item.product.title }}"
+                  >
+                </div>
+              </td>
+
+              <!-- Subtotal -->
+              <td class="product-subtotal" data-title="Total">
+                <span class="amount">{{ item.line_price | money }}</span>
+              </td>
             </tr>
           {% endfor %}
-        </tbody>
-        <tfoot>
+
+          <!-- Cart Actions Row -->
           <tr>
-            <td colspan="4" class="text-right"><strong>{{ 'cart.subtotal' | t }}:</strong></td>
-            <td><strong>{{ cart.total_price | money }}</strong></td>
-            <td></td>
+            <td colspan="6" class="actions">
+              <div class="actions-right">
+                <div class="coupon">
+                  <input type="text" name="discount" class="input-text" id="coupon_code" placeholder="Discount code">
+                  <input type="submit" class="button" name="apply_discount" value="Apply Coupon">
+                </div>
+
+              
+                <div class="update_cart">
+                  <input type="submit" class="button" name="update" value="{{ 'cart.update' | t }}">
+                </div>
+              </div>  
+            </td>
           </tr>
-        </tfoot>
+        </tbody>
       </table>
 
-      <div class="cart-actions">
-        <input type="submit" value="{{ 'cart.update' | t }}" class="button update-cart">
-        <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}" class="button checkout-button">
-      </div>
     </form>
+  </div>
+
+  <!-- Cart Totals -->
+  <div class="cart_totals">
+    <div class="emty-total"></div>
+      <div class="total-box">
+        <h2 cart-total-title>{{ 'cart.title' | t }}</h2>
+        <table class="totatl-cart">
+          <tbody>
+            <tr class="cart-subtotal">
+              <th><strong>{{ 'cart.subtotal' | t }}:</strong></th>
+                <td>
+                  <p class="cart-subprice">
+                    <span>{{ cart.total_price | money }}</span>
+                  </p>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="checkout_cart">
+          <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}" class="button checkout-button">
+        </div>
+      </div>
   </div>
 {%- else -%}
   <div class="empty-cart">
     <div class="cart-header">
       {%- if section.settings.show_empty_cart_image -%}
-        <img src="{{ section.settings.empty_cart_image | img_url: 'medium' }}" alt="{{ section.settings.empty_cart_heading }}" class="img-fluid mb-4 mr-3">
+        <img
+          src="{{ section.settings.empty_cart_image | image_url: 'medium' }}"
+          alt="{{ section.settings.empty_cart_heading | escape }}"
+          width="200px"
+          height="200px"
+          loading="lazy"
+          class="img-fluid mb-4 mr-3"
+        >
       {%- else -%}
-        <img src="https://cdn.shopify.com/s/files/1/0533/2088/files/empty-cart-icon.png?v=1616785642" width="130" height="130" class="img-fluid mb-4 mr-3">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0533/2088/files/empty-cart-icon.png?v=1616785642"
+          width="130"
+          height="130"
+          class="img-fluid mb-4 mr-3"
+        >
       {%- endif -%}
     </div>
     <div class="cart-body">
       <h1 class="cart-title">{{ section.settings.empty_cart_heading }}</h1>
       <p class="cart-pickup-line">{{ section.settings.empty_cart_subheading }}</p>
-      <a href="{{ routes.all_products_collection_url }}" class="cart-shop button">{{ section.settings.empty_cart_button_text }}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-shop button">
+        {{- section.settings.empty_cart_button_text -}}
+      </a>
     </div>
   </div>
 {%- endif -%}

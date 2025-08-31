@@ -32,10 +32,11 @@
     "comment_form_title": "Add a comment"
   },
   "cart": {
-    "checkout": "Checkout",
-    "title": "Cart",
-    "update": "Update",
-    "remove": "Remove"
+    "checkout": "Proceed to Checkout",
+    "title": "Cart total",
+    "update": "Update cart",
+    "remove": "Remove",
+    "subtotal": "Subtotal"
   },
   "customers": {
     "login": {
