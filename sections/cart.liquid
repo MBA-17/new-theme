@@ -129,30 +129,25 @@
       </div>
   </div>
 {%- else -%}
-  <div class="empty-cart">
+  <div class="empty-cart" style="--cart-padding-top:{{ section.settings.padding_top }}px; --cart-padding-bottom:{{ section.settings.padding_bottom }}px;">
     <div class="cart-header">
-      {%- if section.settings.show_empty_cart_image -%}
+      {%- if section.settings.show_empty_cart_image != blank -%}
         <img
-          src="{{ section.settings.empty_cart_image | image_url: 'medium' }}"
+          src="{{ section.settings.empty_cart_image | image_url: width: 300 }}"
           alt="{{ section.settings.empty_cart_heading | escape }}"
-          width="200px"
-          height="200px"
+          width="300px"
+          height="190px"
           loading="lazy"
           class="img-fluid mb-4 mr-3"
         >
       {%- else -%}
-        <img
-          src="https://cdn.shopify.com/s/files/1/0533/2088/files/empty-cart-icon.png?v=1616785642"
-          width="130"
-          height="130"
-          class="img-fluid mb-4 mr-3"
-        >
+        {{ 'image' | placeholder_svg_tag: 'img-fluid mb-4 mr-3' }}
       {%- endif -%}
     </div>
     <div class="cart-body">
       <h1 class="cart-title">{{ section.settings.empty_cart_heading }}</h1>
       <p class="cart-pickup-line">{{ section.settings.empty_cart_subheading }}</p>
-      <a href="{{ routes.all_products_collection_url }}" class="cart-shop button">
+      <a href="{{ routes.all_products_collection_url }}" class="cart-shop button"  style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">
         {{- section.settings.empty_cart_button_text -}}
       </a>
     </div>
@@ -196,6 +191,54 @@
       "id": "empty_cart_button_text",
       "label": "Empty cart button text",
       "default": "Continue Shopping"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bg_hover_color",
+      "label": "Button Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Button Text",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "text_hover_color",
+      "label": "Button Text Hover Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {  
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
     }
   ]
 }
