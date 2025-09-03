@@ -102,12 +102,9 @@
         </tbody>
       </table>
 
-    </form>
-  </div>
-
-  <!-- Cart Totals -->
-  <div class="cart_totals">
-    <div class="emty-total"></div>
+      <!-- Cart Totals -->
+      <div class="cart_totals">
+      <div class="emty-total"></div>
       <div class="total-box">
         <h2 cart-total-title>{{ 'cart.title' | t }}</h2>
         <table class="totatl-cart">
@@ -124,10 +121,16 @@
         </table>
         
         <div class="checkout_cart">
-          <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}" class="button checkout-button">
+          <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}" class="button checkout-button" style="--btn-bg:{{ section.settings.bg_color }}; --btn-bg-hover: {{ section.settings.bg_hover_color }}; --btn-text:{{ section.settings.text_color }}; --btn-text-hover: {{ section.settings.text_hover_color }};">
         </div>
       </div>
+      </div>
+
+    </form>
   </div>
+
+  
+  
 {%- else -%}
   <div class="empty-cart" style="--cart-padding-top:{{ section.settings.padding_top }}px; --cart-padding-bottom:{{ section.settings.padding_bottom }}px;">
     <div class="cart-header">

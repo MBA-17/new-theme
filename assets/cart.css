@@ -152,10 +152,7 @@
 .update_cart .button:hover {
   background: #555;
 }
-.checkout_cart .button {
-  background: #000;
-  margin-left: 10px;
-}
+
 .checkout_cart .button:hover {
   background: #333;
 }
@@ -163,7 +160,7 @@
 /* Cart Totals */
 .cart_totals {
   display: flex;
-  justify-content: flex-end; /* push totals box to the right */
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -215,19 +212,21 @@
 
 .total-box .checkout_cart .button {
   width: 100%;
-  background: #d60059; /* pink/red like your screenshot */
-  color: #fff;
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 20%;
   border: none;
-  padding: 14px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 4px;
+  background: linear-gradient(90deg, var(--btn-bg), var(--btn-bg-hover));;
+  background-size: 200% auto;
+  color: var(--btn-text);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s linear;
+  text-decoration: none;
 }
 
 .total-box .checkout_cart .button:hover {
-  background: #b00047; /* darker hover color */
+  background-position: right;
+  color: var(--btn-text-hover);
 }
 
 /* ---------------------- */

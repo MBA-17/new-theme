@@ -1,47 +1,67 @@
-{% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
+{{ 'collection.css' | asset_url | stylesheet_tag }}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
-
-<h1>{{ collection.title }}</h1>
-
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
+<div class="title-header-banner full-width">
+   <h1 class="collection-title-head">{{ collection.title }}</h1>
 </div>
 
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
+
+  {% paginate collection.products by 4 %}
+      <div class="collection-products" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
+         {% for product in collection.products %}
+            {% render 'Product-card', product: product %}
+         {% endfor %}
+      </div>
+     <div class="pagination">
+        {% render 'pagination', pagination: paginate %}
+     </div>
+  {% endpaginate %}
+
+
 
 {% schema %}
 {
   "name": "t:general.collection",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.collection_card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show product reviews",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:labels.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ]
 }
 {% endschema %}
