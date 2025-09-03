@@ -1,10 +1,13 @@
 .title-header-banner {
-    background-color: yellow;
-    padding: 25px 0;
+    background-color: var(--collection-bg);
 }
 
 h1.collection-title-head {
-    margin: 0 20px;
+    font-size: 3.2rem;
+    font-weight: 900;
+    text-align: var(--collection-title-align);
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .collection-products {

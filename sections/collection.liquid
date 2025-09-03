@@ -1,9 +1,8 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
-<div class="title-header-banner full-width">
-   <h1 class="collection-title-head">{{ collection.title }}</h1>
+<div class="title-header-banner full-width" style="--collection-bg:{{ section.settings.collection_title_bg }};">
+  <h1 class="collection-title-head" style="--collection-title-align:{{ section.settings.collection_title_align }};">{{ collection.title }}</h1>
 </div>
-
 
   {% paginate collection.products by 4 %}
       <div class="collection-products" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
@@ -24,7 +23,43 @@
   "settings": [
     {
       "type": "header",
+      "content": "t:labels.collection_title"
+    },
+    {
+      "type": "color",
+      "id": "collection_title_bg",
+      "label": "t:labels.bgColor",
+      "default": "#fff"
+    },
+    {
+      "type": "select",
+      "id": "collection_title_align",
+      "label": "t:labels.alignment",
+      "options": [
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
+        },
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
       "content": "t:general.collection_card"
+    },
+    {
+      "type": "color",
+      "id": "card_product_bg",
+      "label": "t:labels.background",
+      "default": "#fff"
     },
     {
       "type": "checkbox",

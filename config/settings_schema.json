@@ -102,16 +102,6 @@
         "id": "foreground_color",
         "default": "#333333",
         "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "corner_radius",
-        "min": 0,
-        "max": 20,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.corner_radius",
-        "default": 4
       }
     ]
   },
@@ -242,6 +232,20 @@
         "unit": "px",
         "label": "t:labels.card_shadow_blur",
         "default": 10
+      },
+      {
+        "type": "header",
+        "content": "t:labels.corner_radius"
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "t:labels.corner_radius",
+        "default": 4
       }
     ]
   },

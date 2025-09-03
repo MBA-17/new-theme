@@ -1,4 +1,4 @@
-<div class="collection-product">
+<div class="collection-product" style="--card-bg:{{ section.settings.card_product_bg }};"> 
   {% if product.featured_image %}
     <a href="{{ product.url }}" class="collection-product__image-wrapper">
       {% render 'image',
@@ -10,7 +10,7 @@
       %}
     </a>
     {% else %}
-        {{ 'product-apparel-1' | placeholder_svg_tag: 'collection-product__image-wrapper' }}
+        {{ 'product-apparel-3' | placeholder_svg_tag: 'collection-product__image-wrapper, collection-product__image' }}
   {% endif %}
 
   <div class="collection-product__content">
@@ -43,9 +43,9 @@
 
 {% style %}
 
-  .collection-product {
-  background: #fff;
-  border-radius: 12px;
+.collection-product {
+  background: var(--card-bg);
+  border-radius: var(--style-border-radius);
   overflow: hidden;
   box-shadow: var(--card-shadow-horizontal-offset, 0px) var(--card-shadow-vertical-offset, 0px) var(--card-shadow-blur, 10px) rgba(0, 0, 0, var(--card-shadow-opacity, 0.1));
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -56,7 +56,6 @@
 
 .collection-product:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
 .collection-product__image-wrapper {
