@@ -4,16 +4,23 @@
   <h1 class="collection-title-head" style="--collection-title-align:{{ section.settings.collection_title_align }};">{{ collection.title }}</h1>
 </div>
 
-  {% paginate collection.products by 4 %}
-      <div class="collection-products" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;">
+{%- comment -%} Determine page size from URL or setting {%- endcomment -%}
+{% assign current_page_size = section.settings.page_size_default %}
+
+{%- render 'filters-sorting' -%}
+
+<div id="CollectionSection-{{ section.id }}">
+  {% paginate collection.products by current_page_size %}
+      <div id="CollectionProductGrid-{{ section.id }}" class="collection-products" style="--padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;" tabindex="-1">
          {% for product in collection.products %}
             {% render 'Product-card', product: product %}
          {% endfor %}
       </div>
-     <div class="pagination">
+     <div id="CollectionPagination-{{ section.id }}" class="pagination" aria-label="Pagination">
         {% render 'pagination', pagination: paginate %}
      </div>
   {% endpaginate %}
+</div>  
 
 
 
@@ -72,6 +79,34 @@
       "id": "show_reviews",
       "label": "Show product reviews",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Filters & Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "Enable filters (Search & Discovery)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sort",
+      "label": "Enable sort selector",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sort_options",
+      "label": "Sort options (Label:Value, comma-separated)",
+      "default": "Featured:manual, Best selling:best-selling, Price, low to high:price-ascending, Price, high to low:price-descending, Newest:created-descending"
+    },
+    {
+      "type": "number",
+      "id": "page_size_default",
+      "label": "Default items per page",
+      "default": 4
     },
     {
       "type": "header",
