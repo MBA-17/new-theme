@@ -38,7 +38,8 @@
     "tablet_grid_settings": "Tablet Grid Settings",
     "mobile_grid_settings": "Mobile Grid Settings",
     "card_shadow": "Card Shadow",
-    "social_media_icons": "Social Media"
+    "social_media_icons": "Social Media",
+    "filter_and_sorting": "Filters & Sorting"
   },
   "labels": {
     "alignment": "Alignment",
@@ -85,7 +86,12 @@
     "youtube_url": "YouTube URL",
     "linkedin_url": "LinkedIn URL",
     "pinterest_url": "Pinterest URL",
-    "tiktok_url": "TikTok URL"
+    "tiktok_url": "TikTok URL",
+    "drawer_popup": "Use drawer instead of pop-up",
+    "enable_filters": "Enable filters (Search & Discovery)",
+    "sort_selector": "Enable sort selector",
+    "sort_options": "Sort options (Label:Value, comma-separated)",
+    "items_per_page": "Default items per page"
   },
   "options": {
     "alignment": {
