@@ -49,6 +49,7 @@
   "collections": {
     "title": "Collections",
     "general": {
+      "collection_product_count": "Product",
       "filters_and_sorting": "Filters and sorting",
       "filter_products": "Filter products",
       "items_per_page": "Items per page",

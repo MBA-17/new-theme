@@ -66,8 +66,8 @@
   border-color: #000;
 }
 .fs-select option {
-  background-color: var(--dark-panel-color); /* Style options in dropdown */
-  color: var(--text-color);
+  background-color: #fff; /* Style options in dropdown */
+  color: #000;
 }
 
 /* Responsive */
@@ -124,7 +124,7 @@
   border-radius: 0;
   padding: 25px 30px; /* More generous padding */
   box-shadow: 0 20px 60px var(--shadow-color); /* More prominent shadow */
-  border: 1px solid var(--border-color);
+  border: 1px solid #000;
   animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; /* Bouncy animation */
 }
 
@@ -140,21 +140,21 @@
   margin: 0;
   font-size: 24px; /* Larger title */
   font-weight: 700;
-  color: var(--primary-color);
+  color: #000;
 }
 
 /* Close button (modal + drawer) */
 .fs-close {
   background: transparent;
   border: none;
-  color: var(--text-color);
+  color: #000;
   font-size: 30px; /* Larger close button */
   line-height: 1;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 .fs-close:hover {
-  color: var(--primary-hover-color);
+  color: #000;
   transform: rotate(90deg) scale(1.1); /* Slightly larger on hover */
 }
 
@@ -223,22 +223,22 @@
 .fs-drawer .fs-panel__header {
   border-top: none; /* No top border for header */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Add bottom border for header */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 /* ------------------------------
    Filter Groups & Inputs
 ------------------------------ */
 .fs-group {
-  margin: 20px 0; /* Increased margin between groups */
-  padding-top: 15px; /* Increased padding top */
+  margin: 0px 0;
+  padding-top: 15px;
 }
 .fs-group__title {
   font-weight: 700;
   margin-bottom: 15px; /* Increased margin */
   display: block;
   font-size: 16px;
-  color: var(--primary-color);
+  color: #000;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
