@@ -4,10 +4,14 @@
   <h1 class="collections-header">{{ 'collections.title' | t }}</h1>
 </div>
 
+{% assign current_page_size = section.settings.page_size_default %}
+
+{% paginate collections by current_page_size %}
+
 <div
   class="collections {{ section.settings.grid_item_width }}"
   style="--grid-gap: {{ section.settings.grid_gap }}px; --padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;"
->
+  >
   {% for collection in collections %}
     <a class="collection-card" href="{{ collection.url }}" style="--collection-card-bg: {{ section.settings.card_background }};">
       {% if collection.featured_image %}
@@ -23,7 +27,7 @@
       {% endif %}
 
       <div class="collection-card__content" style="--card-text-align:{{ section.settings.title_alignment }}">
-        <h2 class="collection-title">{{ collection.title }}</h2> 
+        <h2 class="collection-title" style="--hover-color:{{ section.settings.card_hover_color }};">{{ collection.title }}</h2> 
 
         {% if collection.description %}
           <p class="des">{{ collection.description | strip_html | truncatewords: 15 }}</p>
@@ -34,6 +38,10 @@
     </a>
   {% endfor %}
 </div>
+<div class="pagination">
+  {% render 'pagination', pagination: paginate %}
+</div>
+{% endpaginate %}
 
 
 
@@ -44,6 +52,12 @@
     {
       "type": "header",
       "content": "t:labels.collection_title"
+    },
+    {
+      "type": "number",
+      "id": "page_size_default",
+      "label": "t:labels.items_per_page",
+      "default": 4
     },
     {
       "type": "select",
@@ -80,8 +94,7 @@
     {
       "type": "color",
       "id": "card_hover_color",
-      "label": "t:labels.hover_color",
-      "default": "#000"
+      "label": "t:labels.hover_color"
     },
     {
       "type": "header",

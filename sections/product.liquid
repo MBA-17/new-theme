@@ -1,13 +1,20 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when first_value %}
+      
+    {% when second_value %}
+      
+    {% else %}
+      
+  {% endcase %}
+  {% endfor %}
 
 <div class="product-images">
   {% for image in product.images %}
     {% render 'image', class: 'product-image', image: image %}
+
+  {% else %}
+    {{ 'product-apparel-1' | placeholder_svg_tag: 'product-image' }}
   {% endfor %}
 </div>
 

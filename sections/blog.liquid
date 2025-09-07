@@ -1,7 +1,9 @@
 {{ 'blog.css' | asset_url | stylesheet_tag }}
 
 <!--Blog Title-->
-<h1 class="title full-width" style="--title-color:{{ section.settings.title_color }}; --title-bg:{{ section.settings.title_bg }};">{{ blog.title }}</h1>
+<div class="blog-banner full-width">
+  <h1 class="title full-width" style="--title-color:{{ section.settings.title_color }}; --title-bg:{{ section.settings.title_bg }};">{{ blog.title }}</h1>
+</div>
 
 <!--Blog Card-->
 {% paginate blog.articles by 8 %}
@@ -35,9 +37,9 @@
  
             <p class="card-content">
               {% if article.excerpt.size > 0 %}
-                {{ article.excerpt | strip_html | truncatewords: 20 }}
+                {{ article.excerpt | strip_html | truncatewords: 15 }}
               {% else %}
-                {{ article.content | strip_html | truncatewords: 20 }}
+                {{ article.content | strip_html | truncatewords: 15 }}
               {% endif %}  
             </p>
 

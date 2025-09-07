@@ -1,9 +1,9 @@
-/* Logo Positioning */
+/* Logo Positioning 
 .logo-position--left {
   justify-content: space-between;
-}
+}*/
 
-/* Logo centered */
+/* Logo centered 
 .logo-position--center {
   justify-content: center;
   gap: 2rem;
@@ -19,6 +19,75 @@
 
 .logo-position--center .header__utilities {
   order: 3;
+}*/
+
+/* Default (Left Logo, Centered Menu) */
+.logo-position--left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-position--left .logo-wrapper {
+  order: 1;
+  margin-right: auto;
+}
+
+.logo-position--left .site-nav {
+  order: 2;
+  margin: 0 auto; /* centers menu flexibly */
+  position: relative; /* no absolute positioning */
+  transform: none; /* reset */
+}
+
+.logo-position--left .header__utilities {
+  order: 3;
+  margin-left: auto;
+}
+
+
+/* Centered Logo */
+.logo-position--center {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logo-position--center .site-nav {
+  order: 1;
+  margin-right: auto;
+}
+
+.logo-position--center .logo-wrapper {
+  order: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-position--center .header__utilities {
+  order: 3;
+  margin-left: auto;
+}
+
+
+/* Right-aligned Logo */
+.logo-position--right {
+  justify-content: space-between;
+}
+
+.logo-position--right .site-nav {
+  order: 1;
+  margin-right: auto;
+}
+
+.logo-position--right .header__utilities {
+  order: 2;
+}
+
+.logo-position--right .logo-wrapper {
+  order: 3;
+  margin-left: auto;
 }
 
 
@@ -33,7 +102,7 @@ button#mobile-menu-toggle {
 .icon-menu {
   width: 24px;
   height: 24px;
-  stroke: var(--header-foreground); /* or currentColor */
+  stroke: var(--header-foreground);
 }
 
 .close-btn {
@@ -87,14 +156,14 @@ h1.site-title {
 
 .site-title__link {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 0.5rem;
   color: #222;
   text-decoration: none;
 }
 
 .site-nav .nav__list {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
 }
@@ -114,7 +183,7 @@ h1.site-title {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 12px;
+  padding: 8px 10px;
   border-radius: 4px;
   transition: background-color 0.2s;
 }
