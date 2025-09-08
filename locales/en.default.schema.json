@@ -97,7 +97,9 @@
     "alignment": {
       "left": "Left",
       "center": "Center",
-      "right": "Right"
+      "right": "Right",
+      "top": "Top",
+      "bottom": "Bottom"
     },
     "direction": {
       "horizontal": "Horizontal",
