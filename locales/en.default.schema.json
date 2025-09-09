@@ -91,7 +91,8 @@
     "enable_filters": "Enable filters (Search & Discovery)",
     "sort_selector": "Enable sort selector",
     "sort_options": "Sort options (Label:Value, comma-separated)",
-    "items_per_page": "Default items per page"
+    "items_per_page": "Default items per page",
+    "position": "Position"
   },
   "options": {
     "alignment": {

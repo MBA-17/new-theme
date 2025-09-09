@@ -523,17 +523,37 @@
     {
       "type": "select",
       "id": "logo_position",
-      "label": "Logo Position",
+      "label": "t:labels.position",
       "default": "left",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
+        { "value": "left", "label": "t:options.alignment.left" },
+        { "value": "center", "label": "t:options.alignment.center" },
+        { "value": "right", "label": "t:options.alignment.right" }
       ]
     },
     {
       "type": "header",
       "content": "t:labels.menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_posistion",
+      "label": "t:labels.position",
+      "options": [
+        {
+          "label": "t:options.alignment.left",
+          "value": "left"
+        },
+        {
+          "label": "t:options.alignment.center",
+          "value": "center"
+        },
+        {
+          "label": "t:options.alignment.right",
+          "value": "right"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",
