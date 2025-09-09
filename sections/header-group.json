@@ -15,7 +15,7 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "logo_position": "left",
+        "logo_position": "center",
         "menu_row": "bottom",
         "padding_top": 20,
         "padding_bottom": 20
