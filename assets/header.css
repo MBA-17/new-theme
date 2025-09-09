@@ -61,7 +61,7 @@
   justify-content: space-between;
 }
 .logo-position--right .site-nav { order: 1; }
-.logo-position--right .logo-wrapper { order: 2; margin-left: auto; }
+.logo-position--right .logo-wrapper { order: 2; margin-left: auto; margin-right: 16px; }
 .logo-position--right .header__utilities { order: 3; }
 
 
@@ -198,6 +198,28 @@ h1.site-title {
   gap: 1rem;
 }
 
+.utility-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 4px;
+  color: var(--header-foreground);
+  text-decoration: none;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.utility-link:hover {
+  background: var(--header-bg);
+  opacity: 0.8;
+}
+
+.utility-link svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
 .cart-count {
   position: absolute;
   top: -8px;
@@ -258,6 +280,30 @@ h1.site-title {
   color: var(--header-foreground);
 } 
 
+/* Bottom Menu */
+.header__row--bottom {
+  border-top: 1px solid var(--color-border, #e5e5e5);
+  padding: 10px 0;
+  margin-top: 10px;
+  background: var(--header-bg);         
+  color: var(--header-foreground); 
+}
+
+.header__row--bottom .nav__list {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.header__row--bottom .nav__link {
+  color: inherit;                      
+  text-decoration: none;
+}
+
+.header__row--bottom .nav__link:hover {
+  opacity: 0.8;                         
+}
+
 /* Mobile-Menu */
 .mobile-menu-icon {
   display: none;
@@ -277,9 +323,14 @@ h1.site-title {
     justify-content: space-between;
   }
 
+  .header__row--bottom {
+    display: none;
+  }
+
   .mobile-menu-icon {
     display: block;
     line-height: 0;
+    margin-right: 8px;
   }
 
   /*cneter logo position for mobile*/
@@ -310,7 +361,10 @@ h1.site-title {
     order: 3;
     justify-content: flex-end;
   }
-
+  
+  .header__spacer {
+    display: none !important;
+  }
 
   .logo-wrapper{
     order: 2;
@@ -463,9 +517,14 @@ h1.site-title {
     justify-content: space-between;
   }
 
+  .header__row--bottom {
+    display: none;
+  }
+
   .mobile-menu-icon {
     display: block;
     line-height: 0;
+    margin-right: 16px;
   }
 
   /*cneter logo position for tablet*/
@@ -496,7 +555,10 @@ h1.site-title {
     order: 3;
     justify-content: flex-end;
   }
-
+  
+  .header__spacer {
+    display: none !important;
+  }
 
   .logo-wrapper{
     order: 2;
@@ -708,3 +770,11 @@ h1.site-title {
   outline: 2px solid purple; 
 }*/
 
+
+/* Spacer (balances utilities on the right) */
+.logo-position--center .header__spacer {
+  flex-grow: 1;
+  flex-basis: 0;
+  order: 1;
+  justify-content: flex-start;
+}

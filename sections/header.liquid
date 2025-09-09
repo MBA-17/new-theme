@@ -181,49 +181,7 @@
   </div>
 </header> {% endcomment %}
 
-<header class="site-header logo-{{ section.settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
-  <div class="container header__container logo-position--{{ section.settings.logo_position }}">
-    
-    <!-- ========== Top Menu ========== -->
-    {% if section.settings.menu != blank %}
-      {% if section.settings.menu_row == 'top' %}
-      <nav class="site-nav" role="navigation" aria-label="Main menu">
-        <ul class="nav__list">
-        {% for link in section.settings.menu.links %}
-          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
-            {% if link.links != blank %}
-              <button
-                class="dropdown-toggle"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="submenu-{{ forloop.index }}"
-                data-dropdown-toggle
-              >
-                {{ link.title }}
-                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
-                {% for child_link in link.links %}
-                  <li role="none">
-                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
-                      {{ child_link.title }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-        </ul>
-      </nav>
-      {% endif %}
-    {% endif %}
-
-    <!-- ========== Store Name & Logo ========== -->
+<!-- ========== Store Name & Logo ========== -->
     {% comment %} <div class="logo-wrapper">
       <h1 class="site-title" style="max-width: {{ settings.logo_max_width }}px;">
         <a href="{{ routes.root_url }}" class="site-title__link" style="display: flex; align-items: center;">
@@ -280,6 +238,49 @@
         </a>
       </h1>
     </div> {% endcomment %}
+
+<header class="site-header logo-{{ section.settings.logo_position }}" role="banner" style="--header-bg: {{settings.background_color}}; --header-foreground: {{ settings.color_foreground }}; --header-padding-top:{{ section.settings.padding_top }}px; --header-padding-bottom:{{ section.settings.padding_bottom }}px;">
+  <div class="container header__container logo-position--{{ section.settings.logo_position }}">
+
+    <!-- ========== Top Menu ========== -->
+    {% if section.settings.menu != blank %}
+      {% if section.settings.menu_row == 'top' %}
+      <nav class="site-nav" role="navigation" aria-label="Main menu">
+        <ul class="nav__list">
+        {% for link in section.settings.menu.links %}
+          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+            {% if link.links != blank %}
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="submenu-{{ forloop.index }}"
+                data-dropdown-toggle
+              >
+                {{ link.title }}
+                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                {% for child_link in link.links %}
+                  <li role="none">
+                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </nav>
+      {% endif %}
+    {% endif %}
+
 
     <div class="logo-wrapper">
       <h1 class="site-title" style="max-width: {{ settings.logo_max_width }}px;">
@@ -358,9 +359,21 @@
      </h1>
     </div>
 
+    {% if section.settings.menu_row == 'bottom' and section.settings.logo_position == 'center' %}
+      <div class="header__spacer"></div>
+    {% endif %}
 
     <!-- ========== Utilities ========== -->
     <div class="header__utilities">
+      <!-- Search Icon -->
+      <a href="{{ routes.search_url }}" class="utility-link search-link" aria-label="Search">
+        <svg class="icon icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+
+      <!-- Account -->
       {% if shop.customer_accounts_enabled %}
         {% if customer %}
           <a href="{{ routes.account_url }}" class="account-link" aria-label="My account">
@@ -373,6 +386,7 @@
         {% endif %}
       {% endif %}
 
+      <!-- Cart -->
       <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart">
         {% if cart.item_count > 0 %}
           <span class="cart-count">{{ cart.item_count }}</span>
@@ -380,45 +394,6 @@
         {{ 'icon-cart.svg' | inline_asset_content }}
       </a>
     </div>
-
-    <!-- ========== Bottom Menu ========== -->
-    {% if section.settings.menu != blank %}
-      {% if section.settings.menu_row == 'bottom' %}
-      <nav class="site-nav" role="navigation" aria-label="Main menu">
-        <ul class="nav__list">
-        {% for link in section.settings.menu.links %}
-          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
-            {% if link.links != blank %}
-              <button
-                class="dropdown-toggle"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="submenu-{{ forloop.index }}"
-                data-dropdown-toggle
-              >
-                {{ link.title }}
-                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
-                {% for child_link in link.links %}
-                  <li role="none">
-                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
-                      {{ child_link.title }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
-            {% endif %}
-          </li>
-        {% endfor %}
-        </ul>
-      </nav>
-      {% endif %}
-    {% endif %}
 
     <!-- ========== Mobile Menu Button ========== -->
     <div class="mobile-menu-icon">
@@ -489,6 +464,47 @@
     </div>
 
   </div>
+
+  <!-- ========== Bottom Menu ========== -->
+    {% if section.settings.menu != blank %}
+      {% if section.settings.menu_row == 'bottom' %}
+      <div class="header__row header__row--bottom">
+      <nav class="site-nav" role="navigation" aria-label="Main menu">
+        <ul class="nav__list">
+        {% for link in section.settings.menu.links %}
+          <li class="nav__item {% if link.links != blank %}has-dropdown{% endif %}">
+            {% if link.links != blank %}
+              <button
+                class="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="submenu-{{ forloop.index }}"
+                data-dropdown-toggle
+              >
+                {{ link.title }}
+                <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <ul class="dropdown-menu" id="submenu-{{ forloop.index }}" role="menu" aria-hidden="true">
+                {% for child_link in link.links %}
+                  <li role="none">
+                    <a href="{{ child_link.url }}" role="menuitem" class="dropdown__link">
+                      {{ child_link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </nav>
+      </div>
+      {% endif %}
+    {% endif %}
 </header>
 
 
