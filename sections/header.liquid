@@ -230,10 +230,25 @@
               <a href="{{ routes.account_url }}" class="mobile-account-link" aria-label="My account">
                 {{ 'icon-account.svg' | inline_asset_content }}
               </a>
-              {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="mobile-logout-link logout-link"' }}
+              {% comment %} {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="mobile-logout-link logout-link"' }} {% endcomment %}
+               
+              <!-- Logout icon -->
+               <a href="{{ routes.account_logout_url }}" class="mobile-logout-link logout-link" aria-label="Logout">
+                  {{ 'icon-logout.svg' | inline_asset_content }}
+               </a>
             {% else %}
-              {{ 'Login' | customer_login_link | replace: '<a', '<a class="mobile-login-link login-link"' }}
-              {{ 'Register' | customer_register_link | replace: '<a', '<a class="mobile-register-link register-link"' }}
+              {% comment %} {{ 'Login' | customer_login_link | replace: '<a', '<a class="mobile-login-link login-link"' }}
+              {{ 'Register' | customer_register_link | replace: '<a', '<a class="mobile-register-link register-link"' }} {% endcomment %}
+              
+              <!-- Login icon -->
+              <a href="{{ routes.account_login_url }}" class="mobile-login-link login-link" aria-label="Login">
+                {{ 'icon-login.svg' | inline_asset_content }}
+              </a>
+
+              <!-- Register icon -->
+              <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
+                {{ 'icon-register.svg' | inline_asset_content }}
+              </a>
             {% endif %}
           </div>
           
