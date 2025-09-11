@@ -230,7 +230,7 @@
    Filter Groups & Inputs
 ------------------------------ */
 .fs-group {
-  margin: 0px 0;
+  margin-top: 20px;
   padding-top: 15px;
 }
 .fs-group__title {
@@ -294,6 +294,7 @@ ul.fs-list {
   align-items: center;
   gap: 10px; /* Increased gap */
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .fs-price .fs-label {
   color: var(--text-color);

@@ -66,11 +66,11 @@
 
 
 button#mobile-menu-toggle {
-    border: none;
-    background: transparent;
-    text-align: center;
-    color: var(--header-foreground);
-    cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: center;
+  color: var(--header-foreground);
+  cursor: pointer;
 }
 
 .icon-menu {
@@ -80,8 +80,8 @@ button#mobile-menu-toggle {
 }
 
 .close-btn {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
 }
 
 .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
@@ -155,7 +155,7 @@ h1.site-title {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 10px;
+  padding: 6px 6px;
   border-radius: 4px;
   transition: background-color 0.2s;
 }
@@ -291,7 +291,7 @@ h1.site-title {
 
 .header__row--bottom .nav__list {
   display: flex;
-  justify-content: center;
+  justify-content: var(--menu-position);
   gap: 24px;
 }
 
@@ -410,11 +410,12 @@ h1.site-title {
     width: 300px;
     height: 100%;
     background: var(--header-bg);
-    padding: 40px 25px;
+    padding: 20px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1001;
     transform: translateX(-100%);
     transition: transform 0.4s ease;
+    overflow-y: auto;
   }
   
   .mobile-menu-container.active .mobile-menu-drawer {
@@ -422,17 +423,27 @@ h1.site-title {
   }
   
   .close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  span.menu-name {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
   }
   
   .close-btn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 2px;
     color: var(--header-foreground);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    transform: rotate(90deg) scale(1.1);
   }
   
   .mobile-dropdown-toggle {
@@ -492,11 +503,21 @@ h1.site-title {
     display: flex;
     justify-content: start;
     align-items: center;
-    position: relative;
-    top: 60%;
-    gap: 0.5rem;
-    font-size: larger;
+    gap: 1.5rem;
+    font-size: medium;
     font-weight: 600;
+  }
+
+  a.mobile-login-link {
+    text-decoration: none;
+    color: #000;
+    padding: 15px 0;
+  }
+
+  a.mobile-register-link {
+    text-decoration: none;
+    color: #000;
+    padding: 15px 0;
   }
 
   ul.mobile_nav__list {
@@ -604,28 +625,35 @@ h1.site-title {
     width: 300px;
     height: 100%;
     background: var(--header-bg);
-    padding: 40px 25px;
+    padding: 20px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 1001;
     transform: translateX(-100%);
     transition: transform 0.4s ease;
+    overflow-y: auto;
   }
   
   .mobile-menu-container.active .mobile-menu-drawer {
     transform: translateX(0);
   }
-  
+
   .close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  span.menu-name {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
   }
   
   .close-btn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 2px;
+    /* padding: 2px; */
     color: var(--header-foreground);
   }
   
@@ -686,11 +714,21 @@ h1.site-title {
     display: flex;
     justify-content: start;
     align-items: center;
-    position: relative;
-    top: 60%;
-    gap: 0.5rem;
-    font-size: larger;
+    gap: 1.5rem;
+    font-size: medium;
     font-weight: 600;
+  }
+
+  a.mobile-login-link {
+    text-decoration: none;
+    color: #000;
+    padding: 15px 0;
+  }
+
+  a.mobile-register-link {
+    text-decoration: none;
+    color: #000;
+    padding: 15px 0;
   }
 
   ul.mobile_nav__list {
@@ -702,40 +740,14 @@ h1.site-title {
 }
 
 
-/* Desktop & Mobile Logo */
+/* Desktop & Mobile Logo 
 .site-logo {
   display: block;
+  width: auto;
   height: auto;
   max-width: 100%;
-}
+}*/
 
-/* .site-logo.desktop-logo {
-  display: block;
-}
-
-.site-logo.mobile-logo,
-.site-logo.dark-logo {
-  display: none;
-} */
-
-/* Mobile override */
-@media (max-width: 768px) {
-  .site-logo.desktop-logo {
-    display: none;
-  }
-  .site-logo.mobile-logo {
-    display: block;
-  }
-}
-
-/* Dark mode override */
-.theme-dark .site-logo.desktop-logo,
-.theme-dark .site-logo.mobile-logo { 
-  display: none !important;
-}
-.theme-dark .site-logo.dark-logo {
-  display: block !important; 
-}
 
 /* Fallback text - make sure it's always hidden if an image is present */
 .site-logo--text {
@@ -745,6 +757,26 @@ h1.site-title {
   color: var(--header-foreground);
 }
 
+
+/* Logo-picture display helpers */
+.logo-picture { display: inline-block; line-height: 0; } 
+.site-logo { display: block; max-width: 100%; height: auto; }
+
+/* Default: desktop image visible, mobile image hidden */
+.site-logo--desktop { display: block; }
+.site-logo--mobile  { display: none; }
+
+/* Dark-only single image uses this class but doesn't conflict */
+.site-logo--dark { display: block; }
+
+/* Mobile: swap visibility */
+@media (max-width: 768px) {
+  .site-logo--desktop { display: none !important; }
+  .site-logo--mobile  { display: block !important; }
+}
+
+/* Optional: ensure nothing collapses awkwardly */
+.logo-wrapper { line-height: 0; }
 
 /* ============================================
    DEBUG MODE: Visual Alignment Outlines
