@@ -142,23 +142,35 @@
     <!-- ========== Utilities ========== -->
     <div class="header__utilities">
       <!-- Search -->
-      <a href="{{ routes.search_url }}" class="utility-link search-link" aria-label="Search">
-        <svg class="icon icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </a>
+      {% comment %} <a href="{{ routes.search_url }}" class="utility-link search-link" aria-label="Search">
+        {{ 'search.svg' | inline_asset_content }}
+      </a> {% endcomment %}
+      <button type="button" class="utility-link search-link" aria-label="Search" 
+        data-open-search>{{ 'search.svg' | inline_asset_content }}
+      </button>
+      {% render 'search-modal' %}
 
       <!-- Account -->
       {% if shop.customer_accounts_enabled %}
         {% if customer %}
           <a href="{{ routes.account_url }}" class="account-link" aria-label="My account">
-            {{ 'icon-account.svg' | inline_asset_content }}
+            {{ 'user-account.svg' | inline_asset_content }}
           </a>
-          {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="account-link logout-link"' }}
+
+          <!-- Logout -->
+          <a href="{{ routes.account_logout_url }}" class="account-link logout-link" aria-label="Logout">
+            {{ 'log-out.svg' | inline_asset_content }}
+          </a>
         {% else %}
-          {{ 'Login' | customer_login_link | replace: '<a', '<a class="account-link login-link"' }}
-          {{ 'Register' | customer_register_link | replace: '<a', '<a class="account-link register-link"' }}
+          <!--login-->
+          <a href="{{ routes.account_login_url }}" class="account-link login-link" aria-label="Login">
+            {{ 'log-in.svg' | inline_asset_content }}
+          </a>
+
+          <!-- Register icon -->
+          <a href="{{ routes.account_register_url }}" class="account-link register-link" aria-label="Register">
+            {{ 'user-register.svg' | inline_asset_content }}
+          </a>
         {% endif %}
       {% endif %}
 
@@ -228,26 +240,22 @@
           <div class="mobile-account-links">
             {% if customer %}
               <a href="{{ routes.account_url }}" class="mobile-account-link" aria-label="My account">
-                {{ 'icon-account.svg' | inline_asset_content }}
+                {{ 'user-account.svg' | inline_asset_content }}
               </a>
-              {% comment %} {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="mobile-logout-link logout-link"' }} {% endcomment %}
                
-              <!-- Logout icon -->
+               <!-- Logout icon -->
                <a href="{{ routes.account_logout_url }}" class="mobile-logout-link logout-link" aria-label="Logout">
-                  {{ 'icon-logout.svg' | inline_asset_content }}
+                  {{ 'log-out.svg' | inline_asset_content }}
                </a>
             {% else %}
-              {% comment %} {{ 'Login' | customer_login_link | replace: '<a', '<a class="mobile-login-link login-link"' }}
-              {{ 'Register' | customer_register_link | replace: '<a', '<a class="mobile-register-link register-link"' }} {% endcomment %}
-              
               <!-- Login icon -->
               <a href="{{ routes.account_login_url }}" class="mobile-login-link login-link" aria-label="Login">
-                {{ 'icon-login.svg' | inline_asset_content }}
+                {{ 'log-in.svg' | inline_asset_content }}
               </a>
 
               <!-- Register icon -->
               <a href="{{ routes.account_register_url }}" class="mobile-register-link register-link" aria-label="Register">
-                {{ 'icon-register.svg' | inline_asset_content }}
+                {{ 'user-register.svg' | inline_asset_content }}
               </a>
             {% endif %}
           </div>
@@ -258,7 +266,7 @@
 
   </div>
 
-  <!-- ========== Bottom Menu ========== -->
+    <!-- ========== Bottom Menu ========== -->
     {% if section.settings.menu != blank %}
       {% if section.settings.menu_row == 'bottom' %}
       <div class="header__row header__row--bottom">
@@ -298,6 +306,7 @@
       </div>
       {% endif %}
     {% endif %}
+
 </header>
 
 
@@ -346,7 +355,7 @@
           "value": "right"
         }
       ],
-      "default": "left"
+      "default": "center"
     },
     {
       "type": "select",

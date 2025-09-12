@@ -195,7 +195,7 @@ h1.site-title {
 .header__utilities {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .utility-link {
@@ -214,10 +214,10 @@ h1.site-title {
   opacity: 0.8;
 }
 
-.utility-link svg {
+.utility-link a svg {
   width: 24px;
   height: 24px;
-  stroke: currentColor;
+  color: var(--header-foreground);
 }
 
 .cart-count {
@@ -279,6 +279,11 @@ h1.site-title {
   display: block;
   color: var(--header-foreground);
 } 
+
+button.utility-link.search-link {
+  border: none;
+  background: transparent;
+}
 
 /* Bottom Menu */
 .header__row--bottom {

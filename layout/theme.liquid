@@ -15,7 +15,11 @@
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
-
+    
+    {% # Search %}
+    {{ 'search.css' | asset_url | stylesheet_tag }}
+    
+    {% # Social Media %}
     {{ 'social-icons.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
@@ -35,5 +39,7 @@
     </main>
 
     {% sections 'footer-group' %}
+
+    <script src="{{ 'search.js' | asset_url }}" defer></script>
   </body>
 </html>
