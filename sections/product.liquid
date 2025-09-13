@@ -1,4 +1,4 @@
-{% for block in section.blocks %}
+{% comment %} {% for block in section.blocks %}
   {% case block.type %}
     {% when first_value %}
       
@@ -7,7 +7,7 @@
     {% else %}
       
   {% endcase %}
-  {% endfor %}
+  {% endfor %} {% endcomment %}
 
 <div class="product-images">
   {% for image in product.images %}

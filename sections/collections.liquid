@@ -13,7 +13,7 @@
   style="--grid-gap: {{ section.settings.grid_gap }}px; --padding-top:{{ section.settings.padding_top }}px; --padding-bottom:{{ section.settings.padding_bottom }}px;"
   >
   {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}" style="--collection-card-bg: {{ section.settings.card_background }};">
+    {% comment %} <a class="collection-card" href="{{ collection.url }}" style="--collection-card-bg: {{ section.settings.card_background }};">
       {% if collection.featured_image %}
         {% render 'image',
           class: 'collection-card__image',
@@ -35,7 +35,9 @@
 
         <span class="count">{{ collection.all_products_count }} {{ 'collections.general.collection_product_count' | t }}</span>
       </div>
-    </a>
+    </a> {% endcomment %}
+    
+    {% render 'collection-card', collection: collection, section: section %}
   {% endfor %}
 </div>
 <div class="pagination">

@@ -1,8 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "search",
-      "settings": {}
+      "settings": {
+        "custom_title": "Search our store",
+        "title_size": 32,
+        "title_color": "#000",
+        "search_placeholder": "Search for products...",
+        "button_label": "Search",
+        "button_bg": "#000",
+        "button_text": "#ffffff",
+        "bg_color": "#f9fafb",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
